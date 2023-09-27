@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.misc;
+package org.firstinspires.ftc.teamcode.Config;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -104,7 +104,7 @@ public class DriveInit {
 
         //Speed
         cfg.setSpeedMultiplier(speedMultiplier);
-        Runtime
+
         cfg.setrTime(runtime);
 
 

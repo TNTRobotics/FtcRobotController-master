@@ -27,15 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.driver;
+package org.firstinspires.ftc.teamcode.Driving;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.misc.PID;
-import org.firstinspires.ftc.teamcode.misc.DriveClarityHandler;
-import org.firstinspires.ftc.teamcode.misc.Config;
-import org.firstinspires.ftc.teamcode.misc.DriveInit;
+//import org.firstinspires.ftc.teamcode.Config.PID;
+import org.firstinspires.ftc.teamcode.Config.DriveClarityHandler;
+import org.firstinspires.ftc.teamcode.Config.Config;
+import org.firstinspires.ftc.teamcode.Config.DriveInit;
 
 /**
  * This file contains an example of a Linear "OpMode".
