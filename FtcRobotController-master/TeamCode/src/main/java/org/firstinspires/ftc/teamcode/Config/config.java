@@ -22,8 +22,8 @@ public class Config {
     DcMotor rfD = null;
     DcMotor rbD = null;
 
-    DcMotor slide1Motor = null;
-    DcMotor slide2Motor = null;
+   // DcMotor slide1Motor = null;
+    //DcMotor slide2Motor = null;
 
     // Runtime
     ElapsedTime rTime = new ElapsedTime();
@@ -33,20 +33,20 @@ public class Config {
 
 
     // Position of the slide from encoders
-    int slide1Position = 0;
-    int pivotPosition = 0;
+   // int slide1Position = 0;
+    //int pivotPosition = 0;
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
-    Servo clawServo;
-    Servo rotateServo;
-    DcMotor pivotMotor = null;
+   // Servo clawServo;
+   // Servo rotateServo;
+   // DcMotor pivotMotor = null;
 
     // Servos Misc
-    final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
+   // final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
 
     // targetPos
-    int slide1MotorTargetPosition = 0;
-    int slide2MotorTargetPosition = 0;
+   // int slide1MotorTargetPosition = 0;
+   // int slide2MotorTargetPosition = 0;
 
     // SETTERS AND GETTERS
 
@@ -82,7 +82,7 @@ public class Config {
         this.rbD = rbD;
     }
 
-    public DcMotor getSlide1Motor() {
+   /* public DcMotor getSlide1Motor() {
         return slide1Motor;
     }
 
@@ -95,19 +95,21 @@ public class Config {
     }
 
     public void setSlide2Motor(DcMotor slide2Motor) {this.slide2Motor = slide2Motor;}
-
+*/
     public ElapsedTime getrTime() {
         return rTime;
     }
 
     public void setrTime(ElapsedTime rTime) {this.rTime = rTime;}
 
+
+
     public double getSpeedMultiplier() {
         return speedMultiplier;
     }
 
     public void setSpeedMultiplier(double speedMultiplier) {this.speedMultiplier = speedMultiplier;}
-
+/*
     public int getSlide1Position() {return slide1Position;}
 
     public void setSlide1Position(int slide1Position) {this.slide1Position = slide1Position;}
@@ -140,4 +142,6 @@ public class Config {
     public int getSlide1MotorTargetPosition() {return slide1MotorTargetPosition;}
 
     public int getSlide2MotorTargetPosition() {return slide2MotorTargetPosition;}
+
+ */
 }

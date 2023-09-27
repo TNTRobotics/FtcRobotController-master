@@ -23,14 +23,14 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class DriveClarityHandler {
 
     double max;
-
+/*
     int[] pivotPositions = {
             0, // Starting
             800, // Half way
             1350, // All the way
             30, // Little bit from the ground
     };
-
+*/
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
         // Calculate motor speeds here
         double leftFrontMotor = axial + lateral + yaw;
@@ -72,7 +72,7 @@ public class DriveClarityHandler {
         }
 
     }
-
+/*
     public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
         double slidesPower = -gamepad2.left_stick_y * 10;
@@ -224,4 +224,5 @@ public class DriveClarityHandler {
 
         return new double[] {turnInit, turnInit2, lastPing, pivotPos};
     }
+    */
 }

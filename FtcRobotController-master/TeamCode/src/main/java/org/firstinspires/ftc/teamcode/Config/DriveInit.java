@@ -34,11 +34,11 @@ public class DriveInit {
         DcMotor slide1Motor = null;
         DcMotor slide2Motor = null;
         //private DcMotor slideMotor = null;
-
+/*
         Servo clawServo;
         Servo rotateServo;
         DcMotor pivotMotor;
-
+*/
         double speedMultiplier = 1;
 
         //double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
@@ -47,7 +47,7 @@ public class DriveInit {
         leftBackDrive = hwMap.get(DcMotor.class, "leftRear");
         rightFrontDrive = hwMap.get(DcMotor.class, "rightFront");
         rightBackDrive = hwMap.get(DcMotor.class, "rightRear");
-
+/*
 
         // ASSIGN LINEAR SLIDE / ARM MOTOR
         slide1Motor = hwMap.get(DcMotor.class, "s1");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
@@ -62,7 +62,7 @@ public class DriveInit {
         clawServo.setPosition(0);
         rotateServo.setPosition(0);
         pivotMotor.setDirection(DcMotor.Direction.FORWARD);
-
+*/
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -76,8 +76,8 @@ public class DriveInit {
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // ARM MOTOR DIRECTION
-        slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
-        slide2Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
+       // slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
+       // slide2Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
 
         /*slide1Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -89,7 +89,6 @@ public class DriveInit {
         // reset encoder
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        */
 
         slide1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -99,11 +98,13 @@ public class DriveInit {
         slide2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+         */
+
         // Setters
 
         //Speed
         cfg.setSpeedMultiplier(speedMultiplier);
-        // Runtime
+        Runtime
         cfg.setrTime(runtime);
 
 
@@ -113,13 +114,13 @@ public class DriveInit {
         cfg.setRfD(rightFrontDrive);
         cfg.setRbD(rightBackDrive);
 
-        cfg.setSlide1Motor(slide1Motor);
-        cfg.setSlide2Motor(slide2Motor);
+       // cfg.setSlide1Motor(slide1Motor);
+       // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
-        cfg.setClawServo(clawServo);
-        cfg.setRotateServo(rotateServo);
-        cfg.setPivotMotor(pivotMotor);
+       // cfg.setClawServo(clawServo);
+       // cfg.setRotateServo(rotateServo);
+       // cfg.setPivotMotor(pivotMotor);
 
 
     }

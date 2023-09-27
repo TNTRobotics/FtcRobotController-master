@@ -88,7 +88,7 @@ public class Drive extends LinearOpMode {
         Config cfg = new Config();
         DriveInit init = new DriveInit(cfg);
         DriveClarityHandler driveClarityHandler = new DriveClarityHandler();
-
+/*
         // Create PID controller for slides
         PID slidesPID = new PID(.02,.0,.02,.008);
 
@@ -99,13 +99,15 @@ public class Drive extends LinearOpMode {
         pivotPID.getOutputFromError(0,0);
 
         int pivotMotorTargetPosition = 0;
-
+*/
         // Initialize loop variables
         double loopTime = 0;
         double turnInit = 0;
         double turnInit2 = 0;
         double lastPing = 0;
         boolean closeClaw = false;
+
+
 
         // Initialize drive motors and servos
         init.initDrive(hardwareMap);
@@ -132,7 +134,7 @@ public class Drive extends LinearOpMode {
 
             // Set holonomic drive motors based on joystick values
             driveClarityHandler.updateHolonomicDriveMotors(axial, lateral, yaw, cfg.getLfD(), cfg.getRfD(), cfg.getLbD(),cfg.getRbD(), cfg);
-
+/*
             // Update slide motors based on gamepad input
             driveClarityHandler.updateSlideMotors(gamepad2, slidesPID, cfg);
 
@@ -140,7 +142,7 @@ public class Drive extends LinearOpMode {
             closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, closeClaw, cfg);
 
             // Update cone servos based on gamepad input
-            double[] updatedServoValues = driveClarityHandler.updateConeServos(gamepad2, closeClaw, turnInit, turnInit2, pivotMotorTargetPosition, cfg);
+           double[] updatedServoValues = driveClarityHandler.updateConeServos(gamepad2, closeClaw, turnInit, turnInit2, pivotMotorTargetPosition, cfg);
             turnInit = updatedServoValues[0];
             turnInit2 = updatedServoValues[1];
             closeClaw = updatedServoValues[2] == 1;
@@ -154,12 +156,13 @@ public class Drive extends LinearOpMode {
             pivotMotorTargetPosition = (int) updatedServoValuesAfterDelay[3];
 
             driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
-
+*/
             // Add telemetry data
             telemetry.addData("Status", "Run Time: " + cfg.getrTime().toString());
             telemetry.addLine("Motors");
             telemetry.addData("Front left/Right", axial + lateral + yaw);
             telemetry.addData("Back left/Right", axial - lateral + yaw);
+            /*
             telemetry.addLine("Servos");
             telemetry.addData("Close Claw", closeClaw);
             telemetry.addData("Claw, Rotate, Pivot", "%4.2f, %4.2f, %d", cfg.getClawServo().getPosition(), cfg.getRotateServo().getPosition(), cfg.getPivotMotor().getCurrentPosition());
@@ -172,6 +175,8 @@ public class Drive extends LinearOpMode {
             //telemetry.addData("Sensors (Chassis, Claw) cm", "%4.2f, %4.2f", chassisSensor.getDistance(DistanceUnit.CM), coneSensor.getDistance(DistanceUnit.CM));
             loopTime = cfg.getrTime().milliseconds();
             telemetry.update();
+
+            */
         }
     }
 }
