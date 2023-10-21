@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.Config;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import org.firstinspires.ftc.teamcode.misc.PID;
 
 /**
 
@@ -72,10 +75,30 @@ public class DriveClarityHandler {
         }
 
     }
-/*
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
-        double slidesPower = -gamepad2.left_stick_y * 10;
+//    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
+
+    public volatile void updateSlideMotor(Gamepad gamepad2, PID  slidesPID, Config cfg)
+
+    private org.firstinspires.ftc.teamcode.misc.PID slidePID;
+    private double slideNewPos;
+    private Object cfg;
+    double currentArmPID = slidePID.getOutputFromError(slideNewPos, cfg.getSlideMotor().getCurrentPosition());
+
+        if (gamepad2.dpad_up) {
+        slideNewPos = -3800;
+    }
+        if (gamepad2.dpad_left) {
+        slideNewPos = -2700;
+    }
+        if (gamepad2.dpad_right) {
+        slideNewPos = -1470;
+    }
+        if (gamepad2.dpad_down) {
+        slideNewPos = 0;
+    }
+
+     /*   double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
 
         if (armNewPos < -4600) {
@@ -85,24 +108,7 @@ public class DriveClarityHandler {
             armNewPos = 0;
         }
 
-        double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
-
-        if (gamepad2.dpad_up) {
-            armNewPos = -3800;
-            cfg.setSpeedMultiplier(.25);
-        }
-        if (gamepad2.dpad_left) {
-            armNewPos = -2700;
-            cfg.setSpeedMultiplier(.5);
-        }
-        if (gamepad2.dpad_right) {
-            armNewPos = -1470;
-            cfg.setSpeedMultiplier(.75);
-        }
-        if (gamepad2.dpad_down) {
-            armNewPos = 0;
-            cfg.setSpeedMultiplier(1);
-        }
+      
 
         // Secure placement
         if (gamepad2.triangle) {

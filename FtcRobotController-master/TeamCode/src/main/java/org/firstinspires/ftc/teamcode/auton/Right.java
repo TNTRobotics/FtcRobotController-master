@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.misc.PID;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.vision.AprilTags;
+//import org.firstinspires.ftc.teamcode.vision.AprilTags;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -133,21 +133,12 @@ public class Right extends LinearOpMode {
         AtomicInteger targetPos = new AtomicInteger();
 
         // Initialize the PID controller
-        slidesPID.getOutputFromError(0, 0);
-        pivotPID.getOutputFromError(0, 0);
+        PID slideMotorPID;
+        slideMotorPID.getOutputFromError(0, 0);
 
         // Set the starting pose of the drive object
         drive.setPoseEstimate(startPose);
 
-        /* example of raising slide
-                .addDisplacementMarker(() -> {
-                    targetPos.set(-1500);
-                })*/
-        /* example of moving rotate servo
-                .addDisplacementMarker(() -> {
-                    rotateServo.setPosition(.5);
-                })
-                */
 
 
         TrajectorySequence parkNumber1 = drive.trajectorySequenceBuilder(startPose)

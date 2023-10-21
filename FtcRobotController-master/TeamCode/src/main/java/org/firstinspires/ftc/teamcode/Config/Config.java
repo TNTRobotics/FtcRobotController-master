@@ -32,9 +32,7 @@ public class Config {
     double speedMultiplier = 1.0;
 
 
-    // Position of the slide from encoders
-   // int slide1Position = 0;
-    //int pivotPosition = 0;
+    int slideMotorPosition = 0;
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
    // Servo clawServo;
@@ -43,10 +41,6 @@ public class Config {
 
     // Servos Misc
    // final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
-
-    // targetPos
-   // int slide1MotorTargetPosition = 0;
-   // int slide2MotorTargetPosition = 0;
 
     // SETTERS AND GETTERS
 
@@ -82,20 +76,6 @@ public class Config {
         this.rbD = rbD;
     }
 
-   /* public DcMotor getSlide1Motor() {
-        return slide1Motor;
-    }
-
-    public void setSlide1Motor(DcMotor slide1Motor) {
-        this.slide1Motor = slide1Motor;
-    }
-
-    public DcMotor getSlide2Motor() {
-        return slide2Motor;
-    }
-
-    public void setSlide2Motor(DcMotor slide2Motor) {this.slide2Motor = slide2Motor;}
-*/
     public ElapsedTime getrTime() {
         return rTime;
     }
@@ -109,6 +89,9 @@ public class Config {
     }
 
     public void setSpeedMultiplier(double speedMultiplier) {this.speedMultiplier = speedMultiplier;}
+
+    public void setSlideMotor(DcMotor slideMotor) {
+    }
 /*
     public int getSlide1Position() {return slide1Position;}
 
