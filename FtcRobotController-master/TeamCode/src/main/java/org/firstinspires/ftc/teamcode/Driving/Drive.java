@@ -166,18 +166,22 @@ public class Drive extends LinearOpMode {
             /*
             telemetry.addLine("Servos");
             telemetry.addData("Close Claw", closeClaw);
-            telemetry.addData("Claw, Rotate, Pivot", "%4.2f, %4.2f, %d", cfg.getClawServo().getPosition(), cfg.getRotateServo().getPosition(), cfg.getPivotMotor().getCurrentPosition());
             telemetry.addLine("Motor Rotations (Current vs Set)");
-            telemetry.addData("Slide1 Position", "%d, %d", cfg.getSlide1Motor().getCurrentPosition(), cfg.getSlide1MotorTargetPosition());
+
             telemetry.addData("Slide2 Position", "%d, %d", cfg.getSlide2Motor().getCurrentPosition(), cfg.getSlide2MotorTargetPosition());
             telemetry.addData("Slides Power", "%4.2f", cfg.getSlide1Motor().getPower());
             telemetry.addData("Timers (s)", "%4.2f, %4.2f, %4.2f", turnInit/1000, turnInit2/1000, lastPing/1000);
             telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
             //telemetry.addData("Sensors (Chassis, Claw) cm", "%4.2f, %4.2f", chassisSensor.getDistance(DistanceUnit.CM), coneSensor.getDistance(DistanceUnit.CM));
-            loopTime = cfg.getrTime().milliseconds();
-            telemetry.update();
+
 
             */
+
+            telemetry.addData("Claw, Rotate, Pivot", "%4.2f, %4.2f, %d", cfg.getPivotMotor().getCurrentPosition());
+            telemetry.addData("Slide1 Position", "%d, %d", cfg.getSlide1Motor().getCurrentPosition(), cfg.getSlide1MotorTargetPosition());
+            telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
+            loopTime = cfg.getrTime().milliseconds();
+            telemetry.update();
         }
     }
 }

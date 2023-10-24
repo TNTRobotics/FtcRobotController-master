@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.Config;
 
+
+import org.firstinspires.ftc.teamcode.misc.PID;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
-
 /**
 
  This class handles the control of the holonomic drive motors, robot speed, and linear slide motors
@@ -23,14 +24,14 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class DriveClarityHandler {
 
     double max;
-/*
+
     int[] pivotPositions = {
             0, // Starting
             800, // Half way
             1350, // All the way
             30, // Little bit from the ground
     };
-*/
+
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
         // Calculate motor speeds here
         double leftFrontMotor = axial + lateral + yaw;
@@ -73,16 +74,14 @@ public class DriveClarityHandler {
 
     }
 
-    public void updateSlideMotors(Gamepad gamepad2, org.firstinspires.ftc.teamcode.misc.PID slidesPID, Config cfg) {
-    }
-/*
+
     public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
 
-        if (armNewPos < -4600) {
-            armNewPos = -4600;
+        if (armNewPos < -1000) {
+            armNewPos = -1000;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -91,15 +90,15 @@ public class DriveClarityHandler {
         double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
 
         if (gamepad2.dpad_up) {
-            armNewPos = -3800;
+            armNewPos = -700;
             cfg.setSpeedMultiplier(.25);
         }
         if (gamepad2.dpad_left) {
-            armNewPos = -2700;
+            armNewPos = -400;
             cfg.setSpeedMultiplier(.5);
         }
         if (gamepad2.dpad_right) {
-            armNewPos = -1470;
+            armNewPos = -200;
             cfg.setSpeedMultiplier(.75);
         }
         if (gamepad2.dpad_down) {
@@ -113,7 +112,7 @@ public class DriveClarityHandler {
         }
 
         cfg.getSlide1Motor().setPower(currentArmPID);
-        cfg.getSlide2Motor().setPower(currentArmPID);
+        //cfg.getSlide2Motor().setPower(currentArmPID);
 
         cfg.setSlide1Position(armNewPos);
     }
@@ -127,7 +126,7 @@ public class DriveClarityHandler {
 
         cfg.setPivotPosition(targetPos);
     }
-
+/*
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
         if (gamepad2.left_bumper) {
             cfg.getClawServo().setPosition(1);
