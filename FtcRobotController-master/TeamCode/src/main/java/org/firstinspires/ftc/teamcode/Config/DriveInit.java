@@ -85,7 +85,7 @@ public class DriveInit {
         slide1Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //slide2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        slideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD);
         /*
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
