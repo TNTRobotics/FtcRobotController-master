@@ -31,13 +31,14 @@ public class DriveInit {
         DcMotor rightFrontDrive = null;
         DcMotor rightBackDrive = null;
 
-        DcMotor slide1Motor = null;
-        DcMotor slide2Motor = null;
-        //private DcMotor slideMotor = null;
-/*
+        DcMotor slide1Motor;
+        DcMotor pivotMotor;
+        //DcMotor pivotMotor;
+        //DcMotor slide1Motor = null;
+/*DcMotor slide2Motor = null;
         Servo clawServo;
         Servo rotateServo;
-        DcMotor pivotMotor;
+
 */
         double speedMultiplier = 1;
 
@@ -47,22 +48,24 @@ public class DriveInit {
         leftBackDrive = hwMap.get(DcMotor.class, "leftRear");
         rightFrontDrive = hwMap.get(DcMotor.class, "rightFront");
         rightBackDrive = hwMap.get(DcMotor.class, "rightRear");
-/*
+
 
         // ASSIGN LINEAR SLIDE / ARM MOTOR
         slide1Motor = hwMap.get(DcMotor.class, "s1");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
-        slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
+        pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
+       /* slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
 
         // ASSIGN SERVOS
         clawServo = hwMap.get(Servo.class, "clawServo");
         rotateServo = hwMap.get(Servo.class, "rotateServo");
-        pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
+
 
         clawServo.setPosition(0);
         rotateServo.setPosition(0);
+        */
         pivotMotor.setDirection(DcMotor.Direction.FORWARD);
-*/
+
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -76,25 +79,27 @@ public class DriveInit {
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // ARM MOTOR DIRECTION
-       // slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
+       slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
        // slide2Motor.setDirection(DcMotorSimple.Direction.FORWARD); // TEST FORWARD OR BACKWARDS
 
-        /*slide1Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-*/
-        //slideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        slide1Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //slide2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        slideMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         /*
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // reset encoder
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+*/
         slide1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+  /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        slide1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         slide2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -114,13 +119,14 @@ public class DriveInit {
         cfg.setRfD(rightFrontDrive);
         cfg.setRbD(rightBackDrive);
 
-       // cfg.setSlide1Motor(slide1Motor);
+        cfg.setSlide1Motor(slide1Motor);
+        cfg.setPivotMotor(pivotMotor);
        // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
        // cfg.setClawServo(clawServo);
        // cfg.setRotateServo(rotateServo);
-       // cfg.setPivotMotor(pivotMotor);
+
 
 
     }
