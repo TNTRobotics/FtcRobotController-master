@@ -72,6 +72,9 @@ public class DriveClarityHandler {
         }
 
     }
+
+    public void updateSlideMotors(Gamepad gamepad2, org.firstinspires.ftc.teamcode.misc.PID slidesPID, Config cfg) {
+    }
 /*
     public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
