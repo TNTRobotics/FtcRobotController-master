@@ -80,8 +80,8 @@ public class DriveClarityHandler {
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
 
-        if (armNewPos < -1000) {
-            armNewPos = -1000;
+        if (armNewPos < -2000) {
+            armNewPos = -2000;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -90,25 +90,22 @@ public class DriveClarityHandler {
         double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
 
         if (gamepad2.dpad_up) {
-            armNewPos = -700;
-            cfg.setSpeedMultiplier(.25);
+            armNewPos = -2000;
         }
         if (gamepad2.dpad_left) {
-            armNewPos = -400;
-            cfg.setSpeedMultiplier(.5);
+            armNewPos = -1000;
         }
         if (gamepad2.dpad_right) {
             armNewPos = -200;
-            cfg.setSpeedMultiplier(.75);
         }
         if (gamepad2.dpad_down) {
             armNewPos = 0;
-            cfg.setSpeedMultiplier(1);
         }
 
         // Secure placement
         if (gamepad2.triangle) {
-            armNewPos = armNewPos + 200;
+
+
         }
 
         cfg.getSlide1Motor().setPower(currentArmPID);

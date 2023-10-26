@@ -110,9 +110,11 @@ public class Config {
     public void setSpeedMultiplier(double speedMultiplier) {this.speedMultiplier = speedMultiplier;}
 
     public void setSlide1Motor(DcMotor slide1Motor) {
+        this.slide1Motor = slide1Motor;
     }
 
     public void setPivotMotor(DcMotor pivotMotor) {
+        this.pivotMotor = pivotMotor;
     }
 
     public int getSlide1Position() {return slide1Position;}

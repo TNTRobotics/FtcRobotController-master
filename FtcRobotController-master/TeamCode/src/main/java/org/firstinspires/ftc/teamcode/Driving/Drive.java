@@ -159,7 +159,6 @@ public class Drive extends LinearOpMode {
             driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
 */
             // Add telemetry data
-            telemetry.addData("Status", "Run Time: " + cfg.getrTime().toString());
             telemetry.addLine("Motors");
             telemetry.addData("Front left/Right", axial + lateral + yaw);
             telemetry.addData("Back left/Right", axial - lateral + yaw);
@@ -177,8 +176,8 @@ public class Drive extends LinearOpMode {
 
             */
 
-            telemetry.addData("Claw, Rotate, Pivot", "%4.2f, %4.2f, %d", cfg.getPivotMotor().getCurrentPosition());
-            telemetry.addData("Slide1 Position", "%d, %d", cfg.getSlide1Motor().getCurrentPosition(), cfg.getSlide1MotorTargetPosition());
+            telemetry.addData("Power: ", cfg.getPivotMotor().getPower());
+            telemetry.addData("Power: ", cfg.getSlide1Motor().getPower());
             telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
             loopTime = cfg.getrTime().milliseconds();
             telemetry.update();
