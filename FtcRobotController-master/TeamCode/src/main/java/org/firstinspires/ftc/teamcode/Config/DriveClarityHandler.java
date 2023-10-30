@@ -95,6 +95,7 @@ public class DriveClarityHandler {
         if (gamepad2.dpad_up) {
             armNewPos = -1700;
            // pivotPos = pivotPositions[3];
+            //blenis
         }
         if (gamepad2.dpad_left) {
             armNewPos = -1000;
