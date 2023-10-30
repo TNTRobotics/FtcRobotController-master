@@ -78,7 +78,7 @@ public class DriveClarityHandler {
     }
 
 
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID,  int pivotPos, PID pivotPID, Config cfg) {
+    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, PID pivotPID,   int pivotPos, Config cfg) {
 
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
@@ -91,11 +91,12 @@ public class DriveClarityHandler {
         }
 
         double currentArmPID = slidesPID.getOutputFromError(armNewPos,  cfg.getSlide1Motor().getCurrentPosition());
+        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
 
         if (gamepad2.dpad_up) {
             armNewPos = -1700;
-           // pivotPos = pivotPositions[3];
-            //blenis
+            pivotPos = pivotPositions[3];
+
         }
         if (gamepad2.dpad_left) {
             armNewPos = -1000;
