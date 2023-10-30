@@ -36,6 +36,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Config.DriveClarityHandler;
 import org.firstinspires.ftc.teamcode.Config.Config;
 import org.firstinspires.ftc.teamcode.Config.DriveInit;
+import org.firstinspires.ftc.teamcode.misc.PID;
 
 /**
  * This file contains an example of a Linear "OpMode".
@@ -88,7 +89,7 @@ public class Drive extends LinearOpMode {
         Config cfg = new Config();
         DriveInit init = new DriveInit(cfg);
         DriveClarityHandler driveClarityHandler = new DriveClarityHandler();
-/*
+
         // Create PID controller for slides
         PID slidesPID = new PID(.02,.0,.02,.008);
 
@@ -99,7 +100,7 @@ public class Drive extends LinearOpMode {
         pivotPID.getOutputFromError(0,0);
 
         int pivotMotorTargetPosition = 0;
-*/
+
         // Initialize loop variables
         double loopTime = 0;
         double turnInit = 0;
@@ -134,19 +135,19 @@ public class Drive extends LinearOpMode {
 
             // Set holonomic drive motors based on joystick values
             driveClarityHandler.updateHolonomicDriveMotors(axial, lateral, yaw, cfg.getLfD(), cfg.getRfD(), cfg.getLbD(),cfg.getRbD(), cfg);
-/*
+
             // Update slide motors based on gamepad input
             driveClarityHandler.updateSlideMotors(gamepad2, slidesPID, cfg);
 
             // Update claw servos based on gamepad input
-            closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, closeClaw, cfg);
+           // closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, closeClaw, cfg);
 
-            // Update cone servos based on gamepad input
+         /*   // Update cone servos based on gamepad input
            double[] updatedServoValues = driveClarityHandler.updateConeServos(gamepad2, closeClaw, turnInit, turnInit2, pivotMotorTargetPosition, cfg);
             turnInit = updatedServoValues[0];
             turnInit2 = updatedServoValues[1];
             closeClaw = updatedServoValues[2] == 1;
-            pivotMotorTargetPosition = (int) updatedServoValues[3];
+
 
             // Update servos after delay based on gamepad input
             double[] updatedServoValuesAfterDelay = driveClarityHandler.updateServosAfterDelay(turnInit, turnInit2, lastPing, closeClaw, pivotMotorTargetPosition, cfg);
@@ -155,28 +156,32 @@ public class Drive extends LinearOpMode {
             lastPing = updatedServoValuesAfterDelay[2];
             pivotMotorTargetPosition = (int) updatedServoValuesAfterDelay[3];
 
-            driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
 */
+            driveClarityHandler.updatePivotMotor(gamepad2, pivotMotorTargetPosition, pivotPID, cfg);
+
             // Add telemetry data
-            telemetry.addData("Status", "Run Time: " + cfg.getrTime().toString());
             telemetry.addLine("Motors");
             telemetry.addData("Front left/Right", axial + lateral + yaw);
             telemetry.addData("Back left/Right", axial - lateral + yaw);
             /*
             telemetry.addLine("Servos");
             telemetry.addData("Close Claw", closeClaw);
-            telemetry.addData("Claw, Rotate, Pivot", "%4.2f, %4.2f, %d", cfg.getClawServo().getPosition(), cfg.getRotateServo().getPosition(), cfg.getPivotMotor().getCurrentPosition());
             telemetry.addLine("Motor Rotations (Current vs Set)");
-            telemetry.addData("Slide1 Position", "%d, %d", cfg.getSlide1Motor().getCurrentPosition(), cfg.getSlide1MotorTargetPosition());
+
             telemetry.addData("Slide2 Position", "%d, %d", cfg.getSlide2Motor().getCurrentPosition(), cfg.getSlide2MotorTargetPosition());
             telemetry.addData("Slides Power", "%4.2f", cfg.getSlide1Motor().getPower());
             telemetry.addData("Timers (s)", "%4.2f, %4.2f, %4.2f", turnInit/1000, turnInit2/1000, lastPing/1000);
             telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
             //telemetry.addData("Sensors (Chassis, Claw) cm", "%4.2f, %4.2f", chassisSensor.getDistance(DistanceUnit.CM), coneSensor.getDistance(DistanceUnit.CM));
-            loopTime = cfg.getrTime().milliseconds();
-            telemetry.update();
+
 
             */
+
+            telemetry.addData("Power: ", cfg.getPivotMotor().getPower());
+            telemetry.addData("Power: ", cfg.getSlide1Motor().getPower());
+            telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
+            loopTime = cfg.getrTime().milliseconds();
+            telemetry.update();
         }
     }
 }

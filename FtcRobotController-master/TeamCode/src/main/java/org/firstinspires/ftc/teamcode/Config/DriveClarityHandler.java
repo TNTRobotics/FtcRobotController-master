@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.Config;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 
+import org.firstinspires.ftc.teamcode.misc.PID;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import org.firstinspires.ftc.teamcode.misc.PID;
-
 /**
 
  This class handles the control of the holonomic drive motors, robot speed, and linear slide motors
@@ -26,14 +24,14 @@ import org.firstinspires.ftc.teamcode.misc.PID;
 public class DriveClarityHandler {
 
     double max;
-/*
+
     int[] pivotPositions = {
             0, // Starting
             800, // Half way
             1350, // All the way
             30, // Little bit from the ground
     };
-*/
+
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
         // Calculate motor speeds here
         double leftFrontMotor = axial + lateral + yaw;
@@ -76,61 +74,72 @@ public class DriveClarityHandler {
 
     }
 
-//    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
-    public volatile void updateSlideMotor(Gamepad gamepad2, PID  slidesPID, Config cfg)
+    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
 
-    private org.firstinspires.ftc.teamcode.misc.PID slidePID;
-    private double slideNewPos;
-    private Object cfg;
-    double currentArmPID = slidePID.getOutputFromError(slideNewPos, cfg.getSlideMotor().getCurrentPosition());
-
-        if (gamepad2.dpad_up) {
-        slideNewPos = -3800;
-    }
-        if (gamepad2.dpad_left) {
-        slideNewPos = -2700;
-    }
-        if (gamepad2.dpad_right) {
-        slideNewPos = -1470;
-    }
-        if (gamepad2.dpad_down) {
-        slideNewPos = 0;
-    }
-
-     /*   double slidesPower = -gamepad2.left_stick_y * 10;
+        double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
 
-        if (armNewPos < -4600) {
-            armNewPos = -4600;
+        if (armNewPos < -1700) {
+            armNewPos = -1700;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
         }
 
-      
+        double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
 
-        // Secure placement
-        if (gamepad2.triangle) {
-            armNewPos = armNewPos + 200;
+        if (gamepad2.dpad_up) {
+            armNewPos = -1700;
         }
-
+        if (gamepad2.dpad_left) {
+            armNewPos = -1000;
+        }
+        if (gamepad2.dpad_right) {
+            armNewPos = -200;
+        }
+        if (gamepad2.dpad_down) {
+            armNewPos = 0;
+        }
         cfg.getSlide1Motor().setPower(currentArmPID);
-        cfg.getSlide2Motor().setPower(currentArmPID);
-
+        //cfg.getSlide2Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
     }
 
-    public void updatePivotMotor(int targetPos, PID pivotPID, Config cfg) {
+    //this is code that is being worked on for the pivot servo to work
+    public void updatePivotMotor(Gamepad gamepad2, int pivotPos, PID pivotPID, Config cfg) {
+
+        double pivotPower = -gamepad2.right_stick_y * 10;
+        int armNewPos = (int) (cfg.getPivotPosition() + pivotPower);
 
 
-        double currentPivotPID = pivotPID.getOutputFromError(targetPos, cfg.getPivotMotor().getCurrentPosition());
+        if (pivotPos < -150) {
+            pivotPos = -150;
+        }
+        if (pivotPos > 20) {
+            pivotPos = 20;
+        }
+/*
+        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
+
+        if (gamepad2.triangle) {
+            pivotPos = pivotPositions[3];
+            cfg.getRotateServo().setPosition(.8);
+
+            if(turnInit == 0) {
+                turnInit = cfg.getrTime().milliseconds();
+                turnInit2 = 0;
+            }
+        }
 
         cfg.getPivotMotor().setPower(currentPivotPID);
 
-        cfg.setPivotPosition(targetPos);
+        cfg.setPivotPosition(pivotPos);
     }
 
+   */
+
+/*
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
         if (gamepad2.left_bumper) {
             cfg.getClawServo().setPosition(1);
@@ -231,4 +240,5 @@ public class DriveClarityHandler {
         return new double[] {turnInit, turnInit2, lastPing, pivotPos};
     }
     */
+    }
 }
