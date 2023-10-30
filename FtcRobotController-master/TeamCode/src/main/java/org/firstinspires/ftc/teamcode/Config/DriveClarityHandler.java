@@ -25,6 +25,7 @@ public class DriveClarityHandler {
 
     double max;
 
+    int pivotPos = 0;
     int[] pivotPositions = {
             0, // Starting
             200, // Half way
