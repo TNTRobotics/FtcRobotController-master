@@ -33,7 +33,7 @@ public class DriveInit {
 
         DcMotor slide1Motor;
         DcMotor pivotMotor;
-        //DcMotor slide1Motor = null;
+       // DcMotor slide1Motor = null;
 /*DcMotor slide2Motor = null;
         Servo clawServo;
         Servo rotateServo;
@@ -128,6 +128,7 @@ public class DriveInit {
         // Servos
        // cfg.setClawServo(clawServo);
        // cfg.setRotateServo(rotateServo);
+        cfg.slidesPower = 0;
 
 
 

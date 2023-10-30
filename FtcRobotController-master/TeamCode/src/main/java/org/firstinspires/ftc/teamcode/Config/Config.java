@@ -18,6 +18,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Config {
 
 
+    public int slidesPower;
     // Motors (left front drive, left back drive, right front drive, right back drive)
     DcMotor lfD = null;
     DcMotor lbD = null;
