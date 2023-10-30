@@ -156,8 +156,9 @@ public class Drive extends LinearOpMode {
             lastPing = updatedServoValuesAfterDelay[2];
             pivotMotorTargetPosition = (int) updatedServoValuesAfterDelay[3];
 
-            driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
 */
+            driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
+
             // Add telemetry data
             telemetry.addLine("Motors");
             telemetry.addData("Front left/Right", axial + lateral + yaw);

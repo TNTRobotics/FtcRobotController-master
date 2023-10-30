@@ -33,7 +33,6 @@ public class DriveInit {
 
         DcMotor slide1Motor;
         DcMotor pivotMotor;
-        //DcMotor pivotMotor;
         //DcMotor slide1Motor = null;
 /*DcMotor slide2Motor = null;
         Servo clawServo;
@@ -85,7 +84,9 @@ public class DriveInit {
         slide1Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //slide2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        slide1Motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        pivotMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         /*
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -95,13 +96,14 @@ public class DriveInit {
 */
         slide1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-  /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+  /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
 
         slide2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
          */
 
