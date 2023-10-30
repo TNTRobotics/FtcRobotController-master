@@ -27,10 +27,12 @@ public class DriveClarityHandler {
 
     int[] pivotPositions = {
             0, // Starting
-            800, // Half way
-            1350, // All the way
-            30, // Little bit from the ground
+            200, // Half way
+            400, // All the way
+            50, // Little bit from the ground
     };
+
+
 
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
         // Calculate motor speeds here
@@ -75,7 +77,7 @@ public class DriveClarityHandler {
     }
 
 
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
+    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID,  int pivotPos, PID pivotPID, Config cfg) {
 
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
@@ -87,10 +89,11 @@ public class DriveClarityHandler {
             armNewPos = 0;
         }
 
-        double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
+        double currentArmPID = slidesPID.getOutputFromError(armNewPos,  cfg.getSlide1Motor().getCurrentPosition());
 
         if (gamepad2.dpad_up) {
             armNewPos = -1700;
+           // pivotPos = pivotPositions[3];
         }
         if (gamepad2.dpad_left) {
             armNewPos = -1000;
@@ -107,6 +110,7 @@ public class DriveClarityHandler {
     }
 
     //this is code that is being worked on for the pivot servo to work
+
     public void updatePivotMotor(Gamepad gamepad2, int pivotPos, PID pivotPID, Config cfg) {
 
         double pivotPower = -gamepad2.right_stick_y * 10;
@@ -119,6 +123,8 @@ public class DriveClarityHandler {
         if (pivotPos > 20) {
             pivotPos = 20;
         }
+        cfg.setPivotPosition(pivotPos);
+    }
 /*
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
 
@@ -240,5 +246,8 @@ public class DriveClarityHandler {
         return new double[] {turnInit, turnInit2, lastPing, pivotPos};
     }
     */
+
+
+    public void updateSlideMotors(Gamepad gamepad2, org.firstinspires.ftc.teamcode.misc.PID slidesPID, Config cfg) {
     }
 }
