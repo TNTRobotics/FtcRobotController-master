@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.misc;
 
-
 /**
  * This class represents a PID (proportional-integral-derivative) controller.
  * It contains fields for the proportional, integral, derivative, and feedforward constants,
