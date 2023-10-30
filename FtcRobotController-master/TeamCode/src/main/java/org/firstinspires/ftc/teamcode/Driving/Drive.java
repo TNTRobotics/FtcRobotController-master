@@ -157,7 +157,7 @@ public class Drive extends LinearOpMode {
             pivotMotorTargetPosition = (int) updatedServoValuesAfterDelay[3];
 
 */
-            driveClarityHandler.updatePivotMotor(pivotMotorTargetPosition, pivotPID, cfg);
+            driveClarityHandler.updatePivotMotor(gamepad2, pivotMotorTargetPosition, pivotPID, cfg);
 
             // Add telemetry data
             telemetry.addLine("Motors");

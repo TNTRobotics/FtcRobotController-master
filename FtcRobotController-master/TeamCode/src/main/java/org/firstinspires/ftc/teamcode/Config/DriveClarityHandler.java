@@ -105,20 +105,22 @@ public class DriveClarityHandler {
         //cfg.getSlide2Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
     }
+
     //this is code that is being worked on for the pivot servo to work
-   public void updatePivotMotor(Gamepad gamepad2, int pivotPos, PID pivotPID, Config cfg) {
+    public void updatePivotMotor(Gamepad gamepad2, int pivotPos, PID pivotPID, Config cfg) {
 
-       double pivotPower = -gamepad2.right_stick_y * 10;
-       int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-   }
+        double pivotPower = -gamepad2.right_stick_y * 10;
+        int slidesPower = 0;
+        int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
+
+
+        if (pivotPos < -150) {
+            pivotPos = -150;
+        }
+        if (pivotPos > 20) {
+            pivotPos = 20;
+        }
 /*
-        if (pivotNewPos < -150) {
-            pivotNewPos = -150;
-        }
-        if (pivotNewPos > 20) {
-            pivotNewPos = 20;
-        }
-
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
 
         if (gamepad2.triangle) {
@@ -239,4 +241,5 @@ public class DriveClarityHandler {
         return new double[] {turnInit, turnInit2, lastPing, pivotPos};
     }
     */
+    }
 }
