@@ -96,10 +96,10 @@ public class DriveClarityHandler {
 
         }
         if (gamepad2.dpad_left) {
-            armNewPos = -1000;
+            armNewPos = -1300;
         }
         if (gamepad2.dpad_right) {
-            armNewPos = -200;
+            armNewPos = -300;
         }
         if (gamepad2.dpad_down) {
             armNewPos = 0;
@@ -111,13 +111,23 @@ public class DriveClarityHandler {
     }
 
     public void updatePivotMotor(Gamepad gamepad2, PID pivotPID, Config cfg) {
-        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
-        if (gamepad2.cross) {
+
+        double pivotPower = -gamepad2.right_stick_y * 10;
+        int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
+        if (pivotPos < -20){
             pivotPos = -20;
+        }
+        if (pivotPos > 20){
+            pivotPos = 20;
+        }
+        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
+
+        if (gamepad2.cross) {
+            pivotPos = 20;
 
         }
         if (gamepad2.square) {
-            pivotPos = -100;
+            pivotPos = -20;
 
         }
 
