@@ -26,6 +26,8 @@ public class Config {
     DcMotor rbD = null;
 
     DcMotor slide1Motor = null;
+    public int pivotPower;
+    DcMotor pivotMotor = null;
     //DcMotor slide2Motor = null;
 
     // Runtime
@@ -42,7 +44,7 @@ public class Config {
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
    // Servo clawServo;
    // Servo rotateServo;
-    DcMotor pivotMotor = null;
+
 
     // Servos Misc
    // final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle

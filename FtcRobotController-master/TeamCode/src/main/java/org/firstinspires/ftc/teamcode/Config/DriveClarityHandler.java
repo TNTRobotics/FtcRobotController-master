@@ -34,7 +34,6 @@ public class DriveClarityHandler {
     };
 
 
-
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
         // Calculate motor speeds here
         double leftFrontMotor = axial + lateral + yaw;
@@ -78,7 +77,7 @@ public class DriveClarityHandler {
     }
 
 
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, PID pivotPID,   int pivotPos, Config cfg) {
+    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID,  Config cfg) {
 
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
@@ -90,12 +89,10 @@ public class DriveClarityHandler {
             armNewPos = 0;
         }
 
-        double currentArmPID = slidesPID.getOutputFromError(armNewPos,  cfg.getSlide1Motor().getCurrentPosition());
-        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
+        double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
 
         if (gamepad2.dpad_up) {
             armNewPos = -1700;
-            pivotPos = pivotPositions[3];
 
         }
         if (gamepad2.dpad_left) {
@@ -110,10 +107,35 @@ public class DriveClarityHandler {
         cfg.getSlide1Motor().setPower(currentArmPID);
         //cfg.getSlide2Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
+
     }
 
-    //this is code that is being worked on for the pivot servo to work
+    public void updatePivotMotor(Gamepad gamepad2, PID pivotPID, Config cfg) {
 
+        if (gamepad2.cross) {
+            pivotPos = -20;
+
+        }
+        if (gamepad2.square) {
+            pivotPos = -100;
+
+        }
+        double currentPivotPID = 0;
+        cfg.getPivotMotor().setPower(currentPivotPID);
+        cfg.setPivotPosition(pivotPos);
+    }
+/*
+
+
+                double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
+
+            pivotPos = 200;
+            pivotPos = 20;
+
+
+ */
+        //this is code that is being worked on for the pivot servo to work
+/*
     public void updatePivotMotor(Gamepad gamepad2, int pivotPos, PID pivotPID, Config cfg) {
 
         double pivotPower = -gamepad2.right_stick_y * 10;
@@ -128,7 +150,7 @@ public class DriveClarityHandler {
         }
         cfg.setPivotPosition(pivotPos);
     }
-/*
+
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
 
         if (gamepad2.triangle) {
@@ -251,6 +273,4 @@ public class DriveClarityHandler {
     */
 
 
-    public void updateSlideMotors(Gamepad gamepad2, org.firstinspires.ftc.teamcode.misc.PID slidesPID, Config cfg) {
     }
-}

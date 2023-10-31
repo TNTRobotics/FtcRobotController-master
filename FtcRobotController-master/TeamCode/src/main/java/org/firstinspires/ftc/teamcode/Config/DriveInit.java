@@ -33,7 +33,6 @@ public class DriveInit {
 
         DcMotor slide1Motor;
         DcMotor pivotMotor;
-       // DcMotor slide1Motor = null;
 /*DcMotor slide2Motor = null;
         Servo clawServo;
         Servo rotateServo;
@@ -63,7 +62,6 @@ public class DriveInit {
         clawServo.setPosition(0);
         rotateServo.setPosition(0);
         */
-        pivotMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -129,6 +127,7 @@ public class DriveInit {
        // cfg.setClawServo(clawServo);
        // cfg.setRotateServo(rotateServo);
         cfg.slidesPower = 0;
+        cfg.pivotPower = 0;
 
 
 
