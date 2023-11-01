@@ -26,12 +26,13 @@ public class DriveClarityHandler {
     double max;
 
     int pivotPos = 0;
-    int[] pivotPositions = {
+   /* int[] pivotPositions = {
             0, // Starting
             200, // Half way
             400, // All the way
             50, // Little bit from the ground
     };
+    */
 
 
     public void updateHolonomicDriveMotors(double axial, double lateral, double yaw, DcMotor motor1, DcMotor motor2, DcMotor motor3, DcMotor motor4, Config cfg) {
@@ -114,20 +115,22 @@ public class DriveClarityHandler {
 
         double pivotPower = -gamepad2.right_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
-        if (pivotPos < -20){
-            pivotPos = -20;
+        if (pivotPos < 0){
+            pivotPos = 0;
         }
         if (pivotPos > 20){
             pivotPos = 20;
         }
+
+
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
 
         if (gamepad2.cross) {
-            pivotPos = 20;
+            pivotPos = 0;
 
         }
         if (gamepad2.square) {
-            pivotPos = -20;
+            pivotPos = 20;
 
         }
 
@@ -278,7 +281,6 @@ public class DriveClarityHandler {
         }
 
 
-        return new double[] {turnInit, turnInit2, lastPing, pivotPos};
     }
     */
 
