@@ -43,7 +43,7 @@ public class Config {
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
     Servo clawServo;
-   // Servo rotateServo;
+    Servo rotateServo;
 
 
     // Servos Misc
@@ -135,7 +135,7 @@ public class Config {
     public void setClawServo(Servo clawServo) {
         this.clawServo = clawServo;
     }
-/*
+
     public Servo getRotateServo() {
         return rotateServo;
     }
@@ -144,7 +144,7 @@ public class Config {
         this.rotateServo = rotateServo;
     }
 
-   
+   /*
     public int getSlide2MotorTargetPosition() {return slide2MotorTargetPosition;}
 
  */

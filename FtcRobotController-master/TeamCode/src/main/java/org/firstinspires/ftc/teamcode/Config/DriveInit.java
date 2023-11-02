@@ -56,13 +56,15 @@ public class DriveInit {
 
         // ASSIGN SERVOS
 
-        rotateServo = hwMap.get(Servo.class, "rotateServo");
 
 
-        rotateServo.setPosition(0);
+
+
         */
         clawServo = hwMap.get(Servo.class, "clawServo");
         clawServo.setPosition(0);
+        rotateServo = hwMap.get(Servo.class, "rotateServo");
+        rotateServo.setPosition(0);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);

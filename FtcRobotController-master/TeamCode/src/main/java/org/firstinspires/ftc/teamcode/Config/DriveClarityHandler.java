@@ -135,7 +135,7 @@ public class DriveClarityHandler {
             closeClaw = false;
         }
         // END OF CLAW 1
-/*
+
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.left_trigger != 0) {
             if (cfg.getRotateServo().getPosition() >= 1) {
@@ -152,7 +152,7 @@ public class DriveClarityHandler {
             }
         }
         // END OF CLAW 2
-*/
+
         return closeClaw;
     }
 /*
