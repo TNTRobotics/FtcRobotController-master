@@ -152,10 +152,10 @@ public class DriveClarityHandler {
             }
         }
         // END OF CLAW 2
-
+*/
         return closeClaw;
     }
-
+/*
     public double[] updateConeServos(Gamepad gamepad2, boolean closeClaw, double turnInit, double turnInit2, int pivotPos, Config cfg) {
         double closeClaw2 = 0;
 
