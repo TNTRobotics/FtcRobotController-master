@@ -114,16 +114,16 @@ public class DriveClarityHandler {
         }
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
         if (gamepad2.cross) {
-            pivotPos = 20;
+            pivotPos = 0;
         }
         if (gamepad2.square) {
-            pivotPos = 200;
+            pivotPos = 90;
         }
         cfg.getPivotMotor().setPower(currentPivotPID);
 
         cfg.setPivotPosition(pivotPos);
     }
-/*
+
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
         if (gamepad2.left_bumper) {
             cfg.getClawServo().setPosition(1);
@@ -135,7 +135,7 @@ public class DriveClarityHandler {
 
         }
         // END OF CLAW 1
-
+/*
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.left_trigger != 0) {
             if (cfg.getRotateServo().getPosition() >= 1) {
