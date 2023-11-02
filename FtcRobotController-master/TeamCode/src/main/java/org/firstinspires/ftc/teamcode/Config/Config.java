@@ -151,7 +151,7 @@ public class Config {
 public DcMotor getPivotMotor() {return pivotMotor;}
 
     
-  //  public double getINCREMENT() {return INCREMENT;}
+    public double getINCREMENT() {return INCREMENT;}
 
     public int getSlide1MotorTargetPosition() {return slide1MotorTargetPosition;}
 
