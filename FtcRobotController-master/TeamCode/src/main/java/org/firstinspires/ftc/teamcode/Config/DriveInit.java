@@ -33,11 +33,11 @@ public class DriveInit {
 
         DcMotor slide1Motor;
         DcMotor pivotMotor;
-/*DcMotor slide2Motor = null;
+//DcMotor slide2Motor = null;
         Servo clawServo;
-        Servo rotateServo;
+        //Servo rotateServo;
 
-*/
+
         double speedMultiplier = 1;
 
         //double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
