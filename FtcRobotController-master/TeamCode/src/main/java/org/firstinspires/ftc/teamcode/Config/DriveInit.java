@@ -35,7 +35,7 @@ public class DriveInit {
         DcMotor pivotMotor;
 //DcMotor slide2Motor = null;
         Servo clawServo;
-        //Servo rotateServo;
+        Servo rotateServo;
 
 
         double speedMultiplier = 1;
