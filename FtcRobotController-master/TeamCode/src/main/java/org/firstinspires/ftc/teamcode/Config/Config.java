@@ -47,7 +47,7 @@ public class Config {
 
 
     // Servos Misc
-   // final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
+    final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
 
     // targetPos
      int slide1MotorTargetPosition = 0;
