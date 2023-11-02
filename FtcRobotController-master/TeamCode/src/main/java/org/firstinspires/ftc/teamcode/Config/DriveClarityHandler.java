@@ -78,7 +78,7 @@ public class DriveClarityHandler {
     }
 
 
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID,  Config cfg) {
+    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
         if (armNewPos < -1700) {
@@ -103,13 +103,14 @@ public class DriveClarityHandler {
         cfg.getSlide1Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
     }
+
     public void updatePivotMotor(Gamepad gamepad2, PID pivotPID, Config cfg) {
         double pivotPower = gamepad2.right_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
-        if (pivotPos < 0){
+        if (pivotPos < 0) {
             pivotPos = 0;
         }
-        if (pivotPos > 200){
+        if (pivotPos > 200) {
             pivotPos = 200;
         }
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.getPivotMotor().getCurrentPosition());
@@ -132,7 +133,6 @@ public class DriveClarityHandler {
         if (gamepad2.right_bumper) {
             cfg.getClawServo().setPosition(0);
             closeClaw = false;
-
         }
         // END OF CLAW 1
 /*
@@ -225,4 +225,6 @@ public class DriveClarityHandler {
     */
 
 
+        return closeClaw;
     }
+}
