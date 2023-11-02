@@ -127,7 +127,7 @@ public class Config {
     public int getPivotPosition() {return pivotPosition;}
 
     public void setPivotPosition(int pivotPosition) {this.pivotPosition = pivotPosition;}
-/*
+
     public Servo getClawServo() {
         return clawServo;
     }
@@ -135,7 +135,7 @@ public class Config {
     public void setClawServo(Servo clawServo) {
         this.clawServo = clawServo;
     }
-
+/*
     public Servo getRotateServo() {
         return rotateServo;
     }
