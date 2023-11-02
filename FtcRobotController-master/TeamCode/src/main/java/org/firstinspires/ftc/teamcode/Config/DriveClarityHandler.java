@@ -126,7 +126,7 @@ public class DriveClarityHandler {
     }
 
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
-        if (gamepad2.left_bumper) {
+        if (gamepad2.right_trigger !=0) {
             cfg.getClawServo().setPosition(1);
             closeClaw = true;
         }

@@ -55,13 +55,14 @@ public class DriveInit {
 
 
         // ASSIGN SERVOS
-        clawServo = hwMap.get(Servo.class, "clawServo");
+
         rotateServo = hwMap.get(Servo.class, "rotateServo");
 
 
-        clawServo.setPosition(0);
         rotateServo.setPosition(0);
         */
+        clawServo = hwMap.get(Servo.class, "clawServo");
+        clawServo.setPosition(0);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -124,7 +125,7 @@ public class DriveInit {
        // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
-       // cfg.setClawServo(clawServo);
+        cfg.setClawServo(clawServo);
        // cfg.setRotateServo(rotateServo);
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
