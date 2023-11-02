@@ -42,7 +42,7 @@ public class Config {
     int pivotPosition = 0;
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
-    Servo clawServo = null;
+    Servo clawServo;
    // Servo rotateServo;
 
 
