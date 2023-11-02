@@ -137,14 +137,14 @@ public class DriveClarityHandler {
         // END OF CLAW 1
 
         // START OF CLAW 2 (180 turn around)
-        if (gamepad2.left_trigger != 0) {
+        if (gamepad2.circle ) {
             if (cfg.getRotateServo().getPosition() >= 1) {
                 cfg.getRotateServo().setPosition(1);
            // } else {
              //   cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
             }
         }
-        if (gamepad2.right_trigger != 0) {
+        if (gamepad2.triangle) {
             if (cfg.getRotateServo().getPosition() <= 0) {
                 cfg.getRotateServo().setPosition(0);
           //  } else {

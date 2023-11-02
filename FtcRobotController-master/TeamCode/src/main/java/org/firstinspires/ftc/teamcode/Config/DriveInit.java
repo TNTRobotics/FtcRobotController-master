@@ -128,7 +128,7 @@ public class DriveInit {
 
         // Servos
         cfg.setClawServo(clawServo);
-       // cfg.setRotateServo(rotateServo);
+        cfg.setRotateServo(rotateServo);
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
 
