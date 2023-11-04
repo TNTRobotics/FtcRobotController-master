@@ -43,6 +43,7 @@ public class Config {
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
     Servo clawServo;
+    Servo clawServo1;
     Servo rotateServo;
 
 
@@ -134,6 +135,13 @@ public class Config {
 
     public void setClawServo(Servo clawServo) {
         this.clawServo = clawServo;
+    }
+
+    public Servo getClawServo1(){
+        return clawServo1;
+    }
+    public void setClawServo1(Servo clawServo1){
+        this.clawServo1 = clawServo1;
     }
 
     public Servo getRotateServo() {

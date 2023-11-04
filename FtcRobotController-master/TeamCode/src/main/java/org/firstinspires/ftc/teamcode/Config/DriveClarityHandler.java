@@ -134,6 +134,14 @@ public class DriveClarityHandler {
             cfg.getClawServo().setPosition(0);
             closeClaw = false;
         }
+        if(gamepad2.left_trigger !=0){
+            cfg.getClawServo1().setPosition(1);
+            closeClaw = true;
+        }
+        if(gamepad2.left_bumper){
+            cfg.getClawServo1().setPosition(0);
+            closeClaw = false;
+        }
         // END OF CLAW 1
 
         // START OF CLAW 2 (180 turn around)
