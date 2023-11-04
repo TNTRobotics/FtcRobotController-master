@@ -127,15 +127,15 @@ public class DriveClarityHandler {
 
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
         if (gamepad2.right_trigger !=0) {
-            cfg.getClawServo().setPosition(1);
+            cfg.getClawServo().setPosition(0.8);
             closeClaw = true;
         }
         if (gamepad2.right_bumper) {
-            cfg.getClawServo().setPosition(0);
+            cfg.getClawServo().setPosition(1);
             closeClaw = false;
         }
         if(gamepad2.left_trigger !=0){
-            cfg.getClawServo1().setPosition(1);
+            cfg.getClawServo1().setPosition(0.2);
             closeClaw = true;
         }
         if(gamepad2.left_bumper){
@@ -146,8 +146,8 @@ public class DriveClarityHandler {
 
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-            if (cfg.getRotateServo().getPosition() >= 1) {
-                cfg.getRotateServo().setPosition(1);
+            if (cfg.getRotateServo().getPosition() >= .68) {
+                cfg.getRotateServo().setPosition(.7);
             } else {
                 cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
             }

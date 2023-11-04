@@ -63,9 +63,9 @@ public class DriveInit {
 
         */
         clawServo = hwMap.get(Servo.class, "clawServo");
-        clawServo.setPosition(0);
+        clawServo.setPosition(1);
         clawServo1 = hwMap.get(Servo.class, "clawServo1");
-        clawServo1.setPosition(0);
+        clawServo1.setPosition(.2);
         rotateServo = hwMap.get(Servo.class, "rotateServo");
         rotateServo.setPosition(0);
 
