@@ -28,6 +28,7 @@ public class Config {
     DcMotor slide1Motor = null;
     public int pivotPower;
     DcMotor pivotMotor = null;
+    DcMotor pivot2Motor = null;
     //DcMotor slide2Motor = null;
 
     // Runtime
@@ -121,6 +122,11 @@ public class Config {
         this.pivotMotor = pivotMotor;
     }
 
+    public void setPivot2Motor(DcMotor pivot2Motor) {
+        this.pivot2Motor = pivot2Motor;
+    }
+
+
     public int getSlide1Position() {return slide1Position;}
 
     public void setSlide1Position(int slide1Position) {this.slide1Position = slide1Position;}
@@ -128,6 +134,8 @@ public class Config {
     public int getPivotPosition() {return pivotPosition;}
 
     public void setPivotPosition(int pivotPosition) {this.pivotPosition = pivotPosition;}
+
+
 
     public Servo getClawServo() {
         return clawServo;
@@ -158,7 +166,11 @@ public class Config {
  */
 public DcMotor getPivotMotor() {return pivotMotor;}
 
-    
+    public DcMotor getPivot2Motor() {
+        return pivot2Motor;
+    }
+
+
     public double getINCREMENT() {return INCREMENT;}
 
     public int getSlide1MotorTargetPosition() {return slide1MotorTargetPosition;}

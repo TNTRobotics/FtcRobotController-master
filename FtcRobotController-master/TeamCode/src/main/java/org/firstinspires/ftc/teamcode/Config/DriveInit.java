@@ -33,6 +33,7 @@ public class DriveInit {
 
         DcMotor slide1Motor;
         DcMotor pivotMotor;
+        DcMotor pivot2Motor;
 //DcMotor slide2Motor = null;
         Servo clawServo;
         Servo clawServo1;
@@ -52,6 +53,7 @@ public class DriveInit {
         // ASSIGN LINEAR SLIDE / ARM MOTOR
         slide1Motor = hwMap.get(DcMotor.class, "s1");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
         pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
+        pivot2Motor = hwMap.get(DcMotor.class, "pivot2Motor");
        /* slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
 
@@ -91,6 +93,9 @@ public class DriveInit {
         pivotMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        pivot2Motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        pivot2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         /*
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -102,6 +107,8 @@ public class DriveInit {
         slide1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pivot2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pivot2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
@@ -127,6 +134,7 @@ public class DriveInit {
 
         cfg.setSlide1Motor(slide1Motor);
         cfg.setPivotMotor(pivotMotor);
+        cfg.setPivot2Motor(pivot2Motor);
        // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
