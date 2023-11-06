@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+//package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -78,7 +78,7 @@ import java.util.concurrent.TimeUnit;
  *
  */
 
-@TeleOp(name="Omni Drive To AprilTag", group = "Concept")
+/*@TeleOp(name="Omni Drive To AprilTag", group = "Concept")
 public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
 {
     // Adjust these numbers to suit your robot.
@@ -209,6 +209,7 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
      * <p>
      * Positive Yaw is counter-clockwise
      */
+/*
     public void moveRobot(double x, double y, double yaw) {
         // Calculate wheel powers.
         double leftFrontPower    =  x -y -yaw;
@@ -237,7 +238,7 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
 
     /**
      * Initialize the AprilTag processor.
-     */
+     */ /*
     private void initAprilTag() {
         // Create the AprilTag processor by using a builder.
         aprilTag = new AprilTagProcessor.Builder().build();
@@ -260,6 +261,7 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
      Manually set the camera gain and exposure.
      This can only be called AFTER calling initAprilTag(), and only works for Webcams;
     */
+/*
     private void    setManualExposure(int exposureMS, int gain) {
         // Wait for the camera to be open, then use the controls
 
@@ -294,3 +296,5 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
         }
     }
 }
+
+ */

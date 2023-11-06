@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.auton;
 
-import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
+//import com.acmerobotics.dashboard.FtcDashboard;
+//import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+//import com.acmerobotics.roadrunner.geometry.Pose2d;
+//import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.misc.PID;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
+//import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.AprilTags;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -52,8 +52,8 @@ FIXME:
 4. To start a program use the dropdown on the left side under "OpMode". Click on "INIT" to initialize and then press "START" to begin. To turn off press the "STOP"!
 
  */
-@Autonomous(group = "Autonomous")
-public class Right extends LinearOpMode {
+//@Autonomous(group = "Autonomous")
+//public class Right extends LinearOpMode {
 
     /*  int[] pivotPositions = {
               0, // Starting
@@ -65,7 +65,7 @@ public class Right extends LinearOpMode {
       ElapsedTime runtime = new ElapsedTime();
       */
 
-
+/*
 
       PID slidesPID = new PID(.02, 0, .02, .008);
       PID pivotPID = new PID(.02, 0, .02, .008);
@@ -149,7 +149,7 @@ public class Right extends LinearOpMode {
                 })
                 */
 
-
+/*
         TrajectorySequence parkNumber1 = drive.trajectorySequenceBuilder(startPose)
                  .addDisplacementMarker(() -> {
                      targetPos.set(-200);
@@ -290,7 +290,7 @@ public class Right extends LinearOpMode {
              //   .lineTo(new Vector2d(-62, -2.5))
                 //.lineTo(new Vector2d(-62,-6.5))
            //     .build();
-
+/*
         while (!opModeIsActive() && !isStopRequested()) {
             // Update the vision object to detect any visible tags
             // vision.updateTags();
@@ -310,7 +310,7 @@ public class Right extends LinearOpMode {
         }
 
 
-           */
+
             // Wait for the start command
             waitForStart();
 
@@ -371,7 +371,7 @@ public class Right extends LinearOpMode {
                 // Display the loop time in telemetry
                 //  telemetry.addData("Loop time (ms)", runtime.milliseconds() - loopTime);
                 // loopTime = runtime.milliseconds();
-
+/*
                 telemetry.update();
             }
         }
@@ -429,5 +429,7 @@ public class Right extends LinearOpMode {
         telemetry.update();
     }
 
-   */
+
     }
+
+   */

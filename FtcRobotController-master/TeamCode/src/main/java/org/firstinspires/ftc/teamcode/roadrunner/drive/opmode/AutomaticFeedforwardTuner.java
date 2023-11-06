@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+/*package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -31,6 +31,7 @@ import static org.firstinspires.ftc.teamcode.roadrunner.drive.DriveConstants.rpm
  *   4. Adjust the encoder data based on the velocity tuning data and find kA with another linear
  *      regression.
  */
+/*
 @Config
 @Autonomous(group = "drive")
 public class AutomaticFeedforwardTuner extends LinearOpMode {
@@ -218,3 +219,5 @@ public class AutomaticFeedforwardTuner extends LinearOpMode {
         }
     }
 }
+
+ */

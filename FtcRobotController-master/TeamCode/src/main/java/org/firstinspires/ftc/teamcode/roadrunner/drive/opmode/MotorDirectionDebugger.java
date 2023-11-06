@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.roadrunner.drive.opmode;
+/*package org.firstinspires.ftc.teamcode.roadrunner.drive.opmode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -38,6 +38,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
  *
  * Uncomment the @Disabled tag below to use this opmode.
  */
+/*
 @Disabled
 @Config
 @TeleOp(group = "drive")
@@ -91,3 +92,5 @@ public class MotorDirectionDebugger extends LinearOpMode {
         }
     }
 }
+
+ */

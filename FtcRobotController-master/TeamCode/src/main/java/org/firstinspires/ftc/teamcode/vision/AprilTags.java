@@ -123,9 +123,9 @@ public class AprilTags {
                             this.xGetter = tag.pose.x;
                             this.yGetter = tag.pose.y;
                             this.zGetter = tag.pose.z;
-                            this.yawGetter = Math.toDegrees(tag.pose.yaw);
-                            this.pitchGetter = Math.toDegrees(tag.pose.pitch);
-                            this.rollGetter = Math.toDegrees(tag.pose.roll);
+                           // this.yawGetter = Math.toDegrees(tag.pose.yaw);
+                           // this.pitchGetter = Math.toDegrees(tag.pose.pitch);
+                           // this.rollGetter = Math.toDegrees(tag.pose.roll);
                             break;
                         }
                     }
