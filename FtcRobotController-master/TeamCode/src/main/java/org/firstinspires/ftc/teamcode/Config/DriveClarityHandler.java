@@ -115,7 +115,7 @@ public class DriveClarityHandler {
         }
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos,  cfg.getPivotMotor().getCurrentPosition());
         if (gamepad2.cross) {
-            pivotPos = 0;
+            pivotPos = 20;
         }
         if (gamepad2.square) {
             pivotPos = 300;
@@ -147,8 +147,8 @@ public class DriveClarityHandler {
 
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-            if (cfg.getRotateServo().getPosition() >= .68) {
-                cfg.getRotateServo().setPosition(.7);
+            if (cfg.getRotateServo().getPosition() >= .65) {
+                cfg.getRotateServo().setPosition(.65);
             } else {
                 cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
             }

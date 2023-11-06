@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.auton;
 
-//import com.acmerobotics.dashboard.FtcDashboard;
-//import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-//import com.acmerobotics.roadrunner.geometry.Pose2d;
-//import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,9 +12,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.misc.PID;
-//import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
-//import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
-//import org.firstinspires.ftc.teamcode.vision.AprilTags;
+import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.vision.AprilTags;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -63,67 +63,67 @@ public class Right extends LinearOpMode {
 
       // Create a timer object to track elapsed time
       ElapsedTime runtime = new ElapsedTime();
+      */
 
 
 
-      // Create a PID controller for the slide motors
       PID slidesPID = new PID(.02, 0, .02, .008);
       PID pivotPID = new PID(.02, 0, .02, .008);
 
       // Initialize the last ping time to 0 and the closeClaw boolean to true
       //boolean closeClaw = true;
 
-     */
+
     double lastPing = 0;
     // Create a pose object representing the starting pose of the robot
     //Pose2d startPose = new Pose2d(39, -70, Math.toRadians(90));
 
     // Initialize the loop time to 0
-    double loopTime = 0.0;
+//    double loopTime = 0.0;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         // Initialize telemetry for both the driver station and the dashboard
-        //telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         // Create a vision object
         // AprilTags vision = new AprilTags();
 
         // Set up the camera
-        //  int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        //  OpenCvCamera camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+          int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+          OpenCvCamera camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         // Initialize the camera for the vision object
-      /*  vision.initCamera(camera);
+        vision.initCamera(camera);
 
         // Get the linear slide / arm motors from the hardware map
         DcMotor slide1Motor = hardwareMap.get(DcMotor.class, "s1");
-        DcMotor slide2Motor = hardwareMap.get(DcMotor.class, "s2");
+        DcMotor pivotMotor = hardwareMap.get(DcMotor.class, "pivotMotor");
+        DcMotor pivot2Motor = hardwareMap.get(DcMotor.class, "pivot2Motor");
 
         // Set the mode of the motors to STOP_AND_RESET_ENCODER and then RUN_WITHOUT_ENCODER
         slide1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        slide2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pivot2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pivot2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Get the servos from the hardware map
         Servo clawServo = hardwareMap.get(Servo.class, "clawServo");
         Servo rotateServo = hardwareMap.get(Servo.class, "rotateServo"); // I don't think we even need to use this one
-        DcMotor pivotMotor = hardwareMap.get(DcMotor.class, "pivotMotor");
 
         pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pivotMotor.setDirection(DcMotor.Direction.FORWARD);
-        pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         clawServo.setPosition(1);
         closeClaw = true;
 
-       */
+
 
         // Create a drive object
-        //SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         // Initialize the cone ID to 0
         //int id = 0;
@@ -133,11 +133,11 @@ public class Right extends LinearOpMode {
         AtomicInteger targetPos = new AtomicInteger();
 
         // Initialize the PID controller
-       // slidesPID.getOutputFromError(0, 0);
-        //pivotPID.getOutputFromError(0, 0);
+        slidesPID.getOutputFromError(0, 0);
+        pivotPID.getOutputFromError(0, 0);
 
         // Set the starting pose of the drive object
-        //drive.setPoseEstimate(startPose);
+        drive.setPoseEstimate(startPose);
 
         /* example of raising slide
                 .addDisplacementMarker(() -> {
@@ -150,8 +150,8 @@ public class Right extends LinearOpMode {
                 */
 
 
-      //  TrajectorySequence parkNumber1 = drive.trajectorySequenceBuilder(startPose)
-                /* .addDisplacementMarker(() -> {
+        TrajectorySequence parkNumber1 = drive.trajectorySequenceBuilder(startPose)
+                 .addDisplacementMarker(() -> {
                      targetPos.set(-200);
                      //       pivotTargetPos.set(pivotPositions[0]);
                  })
@@ -162,7 +162,7 @@ public class Right extends LinearOpMode {
 
                 // go to corner around ground junction
                 .lineToLinearHeading(new Pose2d(58, -60, Math.toRadians(180)))
-/*
+
                 // start moving linear slides up and prepare cone drop with pivotServo
                 .addDisplacementMarker(() -> {
                     targetPos.set(-1775);
