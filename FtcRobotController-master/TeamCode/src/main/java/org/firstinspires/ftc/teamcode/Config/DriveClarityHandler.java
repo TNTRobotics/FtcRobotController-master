@@ -81,21 +81,21 @@ public class DriveClarityHandler {
     public void updateSlideMotors(Gamepad gamepad2, PID slidesPID, Config cfg) {
         double slidesPower = -gamepad2.left_stick_y * 10;
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-        if (armNewPos < -1700) {
-            armNewPos = -1700;
+        if (armNewPos < -850) {
+            armNewPos = -850;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
         }
         double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.getSlide1Motor().getCurrentPosition());
         if (gamepad2.dpad_up) {
-            armNewPos = -1700;
+            armNewPos = -850;
         }
         if (gamepad2.dpad_left) {
-            armNewPos = -1300;
+            armNewPos = -650;
         }
         if (gamepad2.dpad_right) {
-            armNewPos = -300;
+            armNewPos = -150;
         }
         if (gamepad2.dpad_down) {
             armNewPos = 0;
