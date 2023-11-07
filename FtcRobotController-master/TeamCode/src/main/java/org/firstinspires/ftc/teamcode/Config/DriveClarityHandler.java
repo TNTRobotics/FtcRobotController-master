@@ -105,20 +105,20 @@ public class DriveClarityHandler {
     }
 
     public void updatePivotMotor(Gamepad gamepad2, PID pivotPID, Config cfg) {
-        double pivotPower = gamepad2.right_stick_y * 5;
+        double pivotPower = gamepad2.right_stick_y * 2;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         if (pivotPos < 0) {
             pivotPos = 0;
         }
-        if (pivotPos > 300) {
-            pivotPos = 300;
+        if (pivotPos > 150) {
+            pivotPos = 150;
         }
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos,  cfg.getPivotMotor().getCurrentPosition());
         if (gamepad2.cross) {
-            pivotPos = 20;
+            pivotPos = 70;
         }
         if (gamepad2.square) {
-            pivotPos = 300;
+            pivotPos = 200;
         }
         cfg.getPivotMotor().setPower(currentPivotPID);
         cfg.getPivot2Motor().setPower(currentPivotPID);
@@ -147,8 +147,8 @@ public class DriveClarityHandler {
 
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-            if (cfg.getRotateServo().getPosition() >= .65) {
-                cfg.getRotateServo().setPosition(.65);
+            if (cfg.getRotateServo().getPosition() >= .69) {
+                cfg.getRotateServo().setPosition(.69);
             } else {
                 cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
             }
