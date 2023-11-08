@@ -147,8 +147,8 @@ public class DriveClarityHandler {
 
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-            if (cfg.getRotateServo().getPosition() >= .69) {
-                cfg.getRotateServo().setPosition(.69);
+            if (cfg.getRotateServo().getPosition() >= .67) {
+                cfg.getRotateServo().setPosition(.67);
             } else {
                 cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
             }
