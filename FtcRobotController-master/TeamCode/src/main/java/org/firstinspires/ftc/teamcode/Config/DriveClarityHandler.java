@@ -105,7 +105,7 @@ public class DriveClarityHandler {
     }
 
     public void updatePivotMotor(Gamepad gamepad2, PID pivotPID, Config cfg) {
-        double pivotPower = gamepad2.right_stick_y * 2;
+        double pivotPower = gamepad2.right_stick_y * 0.75;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         if (pivotPos < 0) {
             pivotPos = 0;
