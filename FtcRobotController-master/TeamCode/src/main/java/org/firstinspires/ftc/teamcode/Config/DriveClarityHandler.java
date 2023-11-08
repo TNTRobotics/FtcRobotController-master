@@ -110,15 +110,15 @@ public class DriveClarityHandler {
         if (pivotPos < 0) {
             pivotPos = 0;
         }
-        if (pivotPos > 150) {
-            pivotPos = 150;
+        if (pivotPos > 170) {
+            pivotPos = 170;
         }
         double currentPivotPID = pivotPID.getOutputFromError(pivotPos,  cfg.getPivotMotor().getCurrentPosition());
         if (gamepad2.cross) {
             pivotPos = 70;
         }
         if (gamepad2.square) {
-            pivotPos = 150;
+            pivotPos = 100;
         }
         cfg.getPivotMotor().setPower(currentPivotPID);
         cfg.getPivot2Motor().setPower(currentPivotPID);
