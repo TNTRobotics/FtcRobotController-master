@@ -84,7 +84,7 @@ If I was you I wouldn't probably touch the things here unless something works ho
 @TeleOp(name="Drive", group="Driving")
 
 public class Drive extends LinearOpMode {
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         // Initialize configuration, drive initialization, and drive clarity handler objects
         Config cfg = new Config();
         DriveInit init = new DriveInit(cfg);
@@ -137,8 +137,8 @@ public class Drive extends LinearOpMode {
             driveClarityHandler.updateHolonomicDriveMotors(axial, lateral, yaw, cfg.getLfD(), cfg.getRfD(), cfg.getLbD(),cfg.getRbD(), cfg);
 
             // Update slide motors based on gamepad input
-            driveClarityHandler.updateSlideMotors(gamepad2, slidesPID, cfg);
-            driveClarityHandler.updatePivotMotor(gamepad2, pivotPID, cfg);
+            driveClarityHandler.updateSlideMotors(gamepad2, slidesPID, pivotPID,  closeClaw, cfg);
+          //  driveClarityHandler.updatePivotMotor(gamepad2, pivotPID, cfg);
             // Update claw servos based on gamepad input
             closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, closeClaw, cfg);
 
