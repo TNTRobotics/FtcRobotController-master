@@ -125,7 +125,6 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 100;
             wait(2);
             pivotPos = 170;
             armNewPos = -1400;
@@ -156,7 +155,6 @@ This moves the linear slides to the minimum positions so that the arm can safley
             wait(2);
             pivotPos = 60;
             wait(2);
-            pivotPos = 0;
             if (cfg.getRotateServo().getPosition() >= .65) {
                 cfg.getRotateServo().setPosition(.65);
             } else {
@@ -172,6 +170,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
         cfg.getPivotMotor().setPower(currentPivotPID);
         cfg.getPivot2Motor().setPower(currentPivotPID);
         cfg.setPivotPosition(pivotPos);
+
+
     }
     /**
     This originally called for the pivot motor to be moved through the use of the cross and square buttons. It also has joystick and min/max values configured in here.

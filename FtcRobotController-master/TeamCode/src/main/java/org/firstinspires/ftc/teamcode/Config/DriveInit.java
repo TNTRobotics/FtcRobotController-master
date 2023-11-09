@@ -53,7 +53,9 @@ public class DriveInit {
         // ASSIGN LINEAR SLIDE / ARM MOTOR
         slide1Motor = hwMap.get(DcMotor.class, "s1");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
         pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
+        pivotMotor.setPower(0.7);
         pivot2Motor = hwMap.get(DcMotor.class, "pivot2Motor");
+        pivot2Motor.setPower(0.7);
        /* slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
 

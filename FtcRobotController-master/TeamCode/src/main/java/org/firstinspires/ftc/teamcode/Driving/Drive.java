@@ -137,7 +137,7 @@ public class Drive extends LinearOpMode {
             driveClarityHandler.updateHolonomicDriveMotors(axial, lateral, yaw, cfg.getLfD(), cfg.getRfD(), cfg.getLbD(),cfg.getRbD(), cfg);
 
             // Update slide motors based on gamepad input
-            driveClarityHandler.updateSlideMotors(gamepad2, slidesPID, pivotPID,  closeClaw, cfg);
+            driveClarityHandler.updateSlideMotors(gamepad2, pivotPID, slidesPID, closeClaw, cfg);
           //  driveClarityHandler.updatePivotMotor(gamepad2, pivotPID, cfg);
             // Update claw servos based on gamepad input
             closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, closeClaw, cfg);
