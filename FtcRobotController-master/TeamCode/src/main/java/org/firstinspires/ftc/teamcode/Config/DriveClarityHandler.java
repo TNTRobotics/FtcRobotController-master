@@ -125,9 +125,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            wait(2);
-            pivotPos = 170;
-            armNewPos = -1400;
+            pivotPos = 130;
+            armNewPos = -1000;
             if (cfg.getRotateServo().getPosition() <= 0) {
                 cfg.getRotateServo().setPosition(0);
             } else {
@@ -151,10 +150,8 @@ This moves the linear slides to the minimum positions so that the arm can safley
          position. This will keep it from breaking anything. The claw then flips to the other side of the slide to be ready to pick up the pixels again.
          **/
         if (gamepad2.dpad_down) {
-            armNewPos = 0;
-            wait(2);
+            armNewPos = 50;
             pivotPos = 60;
-            wait(2);
             if (cfg.getRotateServo().getPosition() >= .65) {
                 cfg.getRotateServo().setPosition(.65);
             } else {
