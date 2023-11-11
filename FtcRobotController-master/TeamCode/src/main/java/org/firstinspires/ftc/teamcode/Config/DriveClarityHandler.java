@@ -229,7 +229,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(.95);
+           cfg.getRotateServo().setPosition(1);
         }
         if (gamepad2.triangle) {
                 cfg.getRotateServo().setPosition(0);
