@@ -28,12 +28,6 @@ public class DriveClarityHandler {
 Set positions for the pivot motor code. Just makes life easier.
      **/
     int pivotPos = 0;
-    int[] pivotPositions = {
-            0, // Starting
-            100, // Half way
-            170, // All the way
-            50, // Little bit from the ground
-    };
 
 
     /**
@@ -87,9 +81,11 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
     }
 
     /**
-     What this does- this is set positions that combines the claw pivot, linear slide, and linear slide pivot.
-     **/
-    public void updateSlideMotors(Gamepad gamepad2, PID slidesPID,  PID pivotPID, boolean closeClaw, Config cfg) throws InterruptedException {
+     * What this does- this is set positions that combines the claw pivot, linear slide, and linear slide pivot.
+     *
+     * @return
+     */
+    public boolean updateSlideMotors(Gamepad gamepad2, PID slidesPID, PID pivotPID, boolean closeClaw, Config cfg)  {
         /**
         This next part is making is so that the pivot motors and the linear slide motor can be controlled by the player through the joysticks. This also prevents either of them
          from going over a set limit so that nothing would break.
@@ -102,8 +98,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         double slidesPower = -gamepad2.left_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-        if (armNewPos < -1400) {
-            armNewPos = -1400;
+        if (armNewPos < -1500) {
+            armNewPos = -1500;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -125,25 +121,25 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 130;
-            armNewPos = -1000;
-            if (cfg.getRotateServo().getPosition() <= 0) {
-                cfg.getRotateServo().setPosition(0);
-            } else {
-                cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() - cfg.getINCREMENT());
-            }
+            pivotPos = 170;
+            armNewPos = -1500;
+            cfg.getRotateServo().setPosition(0);
         }
         /**
         This just raises the linear slide to halfway.
          **/
         if (gamepad2.dpad_left) {
-            armNewPos = -1000;
+            pivotPos = 170;
+            armNewPos = -1200;
+            cfg.getRotateServo().setPosition(0);
         }
         /**
          This moves the slides out ever so slightly.
          **/
         if (gamepad2.dpad_right) {
-            armNewPos = -150;
+            armNewPos = 50;
+            pivotPos = 80;
+            cfg.getRotateServo().setPosition(.5);
         }
         /**
 This moves the linear slides to the minimum positions so that the arm can safley go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -151,23 +147,34 @@ This moves the linear slides to the minimum positions so that the arm can safley
          **/
         if (gamepad2.dpad_down) {
             armNewPos = 50;
-            pivotPos = 60;
-            if (cfg.getRotateServo().getPosition() >= .65) {
-                cfg.getRotateServo().setPosition(.65);
-            } else {
-                cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
-            }
+            pivotPos = 0;
+            cfg.getRotateServo().setPosition(1);
+            cfg.getClawServo1().setPosition(0.2);
+            cfg.getClawServo().setPosition(0.8);
+            closeClaw = true;
         }
         /**
+         * This will move up the linear slide so that we could nock over the pixel stacks easily without any problems.
+         */
+        if (gamepad2.square){
+            pivotPos = 50;
+            cfg.getClawServo1().setPosition(0.2);
+            cfg.getClawServo().setPosition(0.8);
+            closeClaw = true;
+        }
+
+
+        /**
 This here, we have yet to figure out exactly what it does. It maybe just configures the motors and servos again saying that they are not needed anymore until they are called.
-         This is just a theory though.
+         This is just a theory though. We also now have motor power controls for the pivot motor so that the motor does not shake too much or go too quickly between
+         set positions.
          **/
         cfg.getSlide1Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.getPivotMotor().setPower(currentPivotPID);
-        cfg.getPivot2Motor().setPower(currentPivotPID);
+        cfg.getPivotMotor().setPower(currentPivotPID * 0.65);
+        cfg.getPivot2Motor().setPower(currentPivotPID * 0.65);
         cfg.setPivotPosition(pivotPos);
-
+        return closeClaw;
 
     }
     /**
@@ -218,22 +225,14 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
         }
         // END OF CLAW 1
         /**
-    This is the location of additional control for the pivot motor. This is how we will be able to fine tune it and correct it during competition.
+    This is the location of additional control for the pivot servo. This is how we will be able to fine tune it and correct it during competition.
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-            if (cfg.getRotateServo().getPosition() >= .65) {
-                cfg.getRotateServo().setPosition(.65);
-            } else {
-                cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() + cfg.getINCREMENT());
-            }
+           cfg.getRotateServo().setPosition(.95);
         }
         if (gamepad2.triangle) {
-            if (cfg.getRotateServo().getPosition() <= 0) {
                 cfg.getRotateServo().setPosition(0);
-            } else {
-                cfg.getRotateServo().setPosition(cfg.getRotateServo().getPosition() - cfg.getINCREMENT());
-            }
         }
         // END OF CLAW 2
 
