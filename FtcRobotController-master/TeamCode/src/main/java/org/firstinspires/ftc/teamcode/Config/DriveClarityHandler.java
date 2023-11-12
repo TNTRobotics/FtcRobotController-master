@@ -121,7 +121,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 140;
+            pivotPos = 150;
             armNewPos = -1300;
             cfg.getRotateServo().setPosition(0);
         }
@@ -137,7 +137,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (gamepad2.dpad_right) {
             armNewPos = 50;
             pivotPos = 80;
-            cfg.getRotateServo().setPosition(.5);
+            cfg.getRotateServo().setPosition(0);
         }
         /**
 This moves the linear slides to the minimum positions so that the arm can safley go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -152,8 +152,9 @@ This moves the linear slides to the minimum positions so that the arm can safley
          */
         if (gamepad2.square){
             pivotPos = 50;
-            cfg.getClawServo1().setPosition(0);
-            cfg.getClawServo().setPosition(1);
+            cfg.getClawServo1().setPosition(.2);
+            cfg.getClawServo().setPosition(.8);
+            cfg.getRotateServo().setPosition(.6);
             closeClaw = true;
         }
 
@@ -223,7 +224,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(.96);
+           cfg.getRotateServo().setPosition(.6);
         }
         if (gamepad2.triangle) {
                 cfg.getRotateServo().setPosition(0);
