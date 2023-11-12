@@ -98,8 +98,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         double slidesPower = -gamepad2.left_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-        if (armNewPos < -1500) {
-            armNewPos = -1500;
+        if (armNewPos < -1900) {
+            armNewPos = -1900;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -107,8 +107,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (pivotPos < -10) {
             pivotPos = -10;
         }
-        if (pivotPos > 170) {
-            pivotPos = 170;
+        if (pivotPos > 160) {
+            pivotPos = 160;
         }
         /**
         Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
@@ -121,17 +121,15 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 170;
-            armNewPos = -1500;
+            pivotPos = 140;
+            armNewPos = -1300;
             cfg.getRotateServo().setPosition(0);
         }
         /**
         This just raises the linear slide to halfway.
          **/
         if (gamepad2.dpad_left) {
-            pivotPos = 170;
-            armNewPos = -1200;
-            cfg.getRotateServo().setPosition(0);
+            armNewPos = -1900;
         }
         /**
          This moves the slides out ever so slightly.
@@ -146,20 +144,16 @@ This moves the linear slides to the minimum positions so that the arm can safley
          position. This will keep it from breaking anything. The claw then flips to the other side of the slide to be ready to pick up the pixels again.
          **/
         if (gamepad2.dpad_down) {
-            armNewPos = 50;
+            armNewPos = 0;
             pivotPos = 0;
-            cfg.getRotateServo().setPosition(1);
-            cfg.getClawServo1().setPosition(0.2);
-            cfg.getClawServo().setPosition(0.8);
-            closeClaw = true;
         }
         /**
          * This will move up the linear slide so that we could nock over the pixel stacks easily without any problems.
          */
         if (gamepad2.square){
             pivotPos = 50;
-            cfg.getClawServo1().setPosition(0.2);
-            cfg.getClawServo().setPosition(0.8);
+            cfg.getClawServo1().setPosition(0);
+            cfg.getClawServo().setPosition(1);
             closeClaw = true;
         }
 
@@ -171,8 +165,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         cfg.getSlide1Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.getPivotMotor().setPower(currentPivotPID * 0.65);
-        cfg.getPivot2Motor().setPower(currentPivotPID * 0.65);
+        cfg.getPivotMotor().setPower(currentPivotPID * 0.6);
+        cfg.getPivot2Motor().setPower(currentPivotPID * 0.6);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 
@@ -229,7 +223,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(1);
+           cfg.getRotateServo().setPosition(.96);
         }
         if (gamepad2.triangle) {
                 cfg.getRotateServo().setPosition(0);
