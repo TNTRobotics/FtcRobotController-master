@@ -203,11 +203,11 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
      **/
     public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
         if (gamepad2.left_trigger !=0) {
-            cfg.getClawServo().setPosition(0.8);
+            cfg.getClawServo().setPosition(1);
             closeClaw = true;
         }
         if (gamepad2.left_bumper) {
-            cfg.getClawServo().setPosition(1);
+            cfg.getClawServo().setPosition(.8);
             closeClaw = false;
         }
         if(gamepad2.right_trigger !=0){
