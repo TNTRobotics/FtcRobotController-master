@@ -121,15 +121,15 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 150;
-            armNewPos = -1300;
+            pivotPos = 160;
+            armNewPos = -900;
             cfg.getRotateServo().setPosition(0);
         }
         /**
         This just raises the linear slide to halfway.
          **/
         if (gamepad2.dpad_left) {
-            armNewPos = -1900;
+            armNewPos = -1400;
         }
         /**
          This moves the slides out ever so slightly.
@@ -166,8 +166,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         cfg.getSlide1Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.getPivotMotor().setPower(currentPivotPID * 0.6);
-        cfg.getPivot2Motor().setPower(currentPivotPID * 0.6);
+        cfg.getPivotMotor().setPower(currentPivotPID * .5);
+        cfg.getPivot2Motor().setPower(currentPivotPID * .5);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 
