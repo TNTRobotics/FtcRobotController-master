@@ -52,7 +52,7 @@ FIXME:
 4. To start a program use the dropdown on the left side under "OpMode". Click on "INIT" to initialize and then press "START" to begin. To turn off press the "STOP"!
 
  */
-@Autonomous(group = "Autonomous")
+@Autonomous(name ="auto1", group = "Autonomous")
 public class auto1 extends LinearOpMode {
     DcMotor leftFrontDrive = null;
     DcMotor leftBackDrive = null;
@@ -95,6 +95,7 @@ public class auto1 extends LinearOpMode {
 //        leftBackDrive.setPower(0);
 //        rightFrontDrive.setPower(0);
 //        rightBackDrive.setPower(0);
+        Thread.sleep(2000);
         DriveForward(0);
 
 
