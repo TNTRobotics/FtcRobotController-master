@@ -69,7 +69,7 @@ public class DriveInit {
         clawServo1 = hwMap.get(Servo.class, "clawServo1");
         clawServo1.setPosition(0);
         rotateServo = hwMap.get(Servo.class, "rotateServo");
-        rotateServo.setPosition(0);
+        rotateServo.setPosition(.63);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);

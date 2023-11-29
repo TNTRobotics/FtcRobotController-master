@@ -90,7 +90,7 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
         This next part is making is so that the pivot motors and the linear slide motor can be controlled by the player through the joysticks. This also prevents either of them
          from going over a set limit so that nothing would break.
         * */
-        double pivotPower = -gamepad2.right_stick_y * 2;
+        double pivotPower = -gamepad2.right_stick_y * 4;
         /**
 For the pivot motor here, we might want to slow it down ever so slightly (not the joystick part) like the chassis code is doing so that we do not have the whole robot shake. This
          will also simplify the code a lot.
@@ -98,8 +98,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         double slidesPower = -gamepad2.left_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-        if (armNewPos < -1900) {
-            armNewPos = -1900;
+        if (armNewPos < -2200) {
+            armNewPos = -2200;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -123,7 +123,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (gamepad2.dpad_up) {
             pivotPos = 160;
             armNewPos = -900;
-            cfg.getRotateServo().setPosition(0);
+            cfg.getRotateServo().setPosition(.63);
         }
         /**
         This just raises the linear slide to halfway.
@@ -137,7 +137,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (gamepad2.dpad_right) {
             armNewPos = 50;
             pivotPos = 80;
-            cfg.getRotateServo().setPosition(0);
+            cfg.getRotateServo().setPosition(.6);
         }
         /**
 This moves the linear slides to the minimum positions so that the arm can safley go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -166,8 +166,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         cfg.getSlide1Motor().setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.getPivotMotor().setPower(currentPivotPID * .5);
-        cfg.getPivot2Motor().setPower(currentPivotPID * .5);
+        cfg.getPivotMotor().setPower(currentPivotPID * .6);
+        cfg.getPivot2Motor().setPower(currentPivotPID * .6);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 
@@ -211,7 +211,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
             closeClaw = false;
         }
         if(gamepad2.right_trigger !=0){
-            cfg.getClawServo1().setPosition(0.2);
+            cfg.getClawServo1().setPosition(0.3);
             closeClaw = true;
         }
         if(gamepad2.right_bumper){
@@ -224,10 +224,10 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(.6);
+           cfg.getRotateServo().setPosition(0.04);
         }
         if (gamepad2.triangle) {
-                cfg.getRotateServo().setPosition(0);
+                cfg.getRotateServo().setPosition(0.63);
         }
         // END OF CLAW 2
 
