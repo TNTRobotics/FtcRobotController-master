@@ -17,6 +17,8 @@ import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySe
 import org.firstinspires.ftc.teamcode.vision.AprilTags;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvWebcam;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -58,8 +60,19 @@ public class auto1 extends LinearOpMode {
     DcMotor leftBackDrive = null;
     DcMotor rightFrontDrive = null;
     DcMotor rightBackDrive = null;
+    OpenCvWebcam webcam;
 
     @Override public void runOpMode() throws InterruptedExeception {
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwaremap.get(WebcamName.class, "Webcam"), cameraMonitorViewId);
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener(){
+            @Override
+            public void onOpened(){
+                webcam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+            }
+            @Override
+            public void onError(int errorCode){}
+        });
         leftFrontDrive = HardwareMap.dcMotor.get("leftFrontDrive");
         leftBackDrive = HardwareMap.dcMotor.get("leftFrontDrive");
         rightFrontDrive = HardwareMap.dcMotor.get("leftFrontDrive");
