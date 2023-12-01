@@ -151,10 +151,10 @@ This moves the linear slides to the minimum positions so that the arm can safley
          * This will move up the linear slide so that we could nock over the pixel stacks easily without any problems.
          */
         if (gamepad2.square){
-            pivotPos = 50;
+            pivotPos = 51;
             cfg.getClawServo1().setPosition(.2);
             cfg.getClawServo().setPosition(.8);
-            cfg.getRotateServo().setPosition(.6);
+            cfg.getRotateServo().setPosition(0);
             closeClaw = true;
         }
 
@@ -224,7 +224,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(0.04);
+           cfg.getRotateServo().setPosition(0.0);
         }
         if (gamepad2.triangle) {
                 cfg.getRotateServo().setPosition(0.63);
