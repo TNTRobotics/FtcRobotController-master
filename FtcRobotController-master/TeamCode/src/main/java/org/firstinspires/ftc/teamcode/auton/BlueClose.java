@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @Autonomous(name = "Red Far")
-public class RedClose extends LinearOpMode {
+public class BlueClose extends LinearOpMode {
 
     private IMU imu;
 
@@ -43,12 +43,12 @@ public class RedClose extends LinearOpMode {
         waitForStart();
 
 
-        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+84)>1){
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-84)>1){
 
-            leftFrontDrive.setVelocity(-300);
-            rightBackDrive.setVelocity(300);
-            leftBackDrive.setVelocity(-300);
-            rightFrontDrive.setVelocity(300);
+            leftFrontDrive.setVelocity(300);
+            rightBackDrive.setVelocity(-300);
+            leftBackDrive.setVelocity(300);
+            rightFrontDrive.setVelocity(-300);
 
         }
 
