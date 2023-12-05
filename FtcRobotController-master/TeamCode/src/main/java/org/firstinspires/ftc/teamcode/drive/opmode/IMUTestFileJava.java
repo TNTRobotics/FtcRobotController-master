@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 @TeleOp(name = "IMUTestFileJava")
 public class IMUTestFileJava extends LinearOpMode {
 
@@ -26,7 +28,7 @@ public class IMUTestFileJava extends LinearOpMode {
             while (opModeIsActive()) {
                 // Put loop blocks here.
                 telemetry.addData("Robot Orientation", imu.getRobotOrientationAsQuaternion());
-                telemetry.addData("Robot Angle", imu.getRobotYawPitchRollAngles());
+                telemetry.addData("Robot Angle", imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
                 telemetry.update();
             }
         }
