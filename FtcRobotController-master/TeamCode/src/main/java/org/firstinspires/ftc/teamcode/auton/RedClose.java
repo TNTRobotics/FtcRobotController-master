@@ -51,7 +51,7 @@ public class RedClose extends LinearOpMode {
         sleep(8000);
 
 
-        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+83)>1){
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+84)>1){
 
             leftFrontDrive.setVelocity(-300);
             rightBackDrive.setVelocity(300);
