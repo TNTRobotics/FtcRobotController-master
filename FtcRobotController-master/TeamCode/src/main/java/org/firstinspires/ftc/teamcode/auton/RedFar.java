@@ -47,7 +47,7 @@ public class RedFar extends LinearOpMode {
         leftBackDrive.setVelocity(300);
         rightFrontDrive.setVelocity(300);
 
-        sleep(8000);
+        sleep(7800);
 
 
         while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+84)>1){
@@ -64,7 +64,7 @@ public class RedFar extends LinearOpMode {
         leftBackDrive.setVelocity(600);
         rightFrontDrive.setVelocity(600);
 
-        sleep(7000);
+        sleep(6800);
 
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);
