@@ -26,6 +26,7 @@ public class BlueFar extends LinearOpMode {
 
 
         waitForStart();
+        imu.resetYaw();
         telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
         telemetry.update();
 

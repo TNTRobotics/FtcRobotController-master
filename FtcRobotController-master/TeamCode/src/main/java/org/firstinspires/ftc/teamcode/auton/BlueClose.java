@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -25,10 +26,20 @@ public class BlueClose extends LinearOpMode {
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
 
 
-        waitForStart();
+        imu.resetYaw();
         telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
         telemetry.update();
+        //servo init
 
+        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
+        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
+        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
+        clawServo.setPosition(1);
+        clawServo1.setPosition(0);
+        rotateServo.setPosition(.63);
+
+
+        //motor init
         DcMotorEx leftFrontDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "leftFront");
         DcMotorEx leftBackDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "leftRear");
         DcMotorEx rightFrontDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "rightFront");
@@ -40,36 +51,57 @@ public class BlueClose extends LinearOpMode {
         rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        imu.resetYaw();
+        telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
+        telemetry.update();
+
         waitForStart();
 
-        leftFrontDrive.setVelocity(600);
-        rightBackDrive.setVelocity(600);
-        leftBackDrive.setVelocity(600);
-        rightFrontDrive.setVelocity(600);
+        leftFrontDrive.setVelocity(1000);
+        rightBackDrive.setVelocity(1000);
+        leftBackDrive.setVelocity(1000);
+        rightFrontDrive.setVelocity(1000);
 
         sleep(500);
 
 
-        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-84)>1){
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-80)>1){
 
-            leftFrontDrive.setVelocity(300);
-            rightBackDrive.setVelocity(-300);
-            leftBackDrive.setVelocity(300);
-            rightFrontDrive.setVelocity(-300);
+            leftFrontDrive.setVelocity(1000);
+            rightBackDrive.setVelocity(-1000);
+            leftBackDrive.setVelocity(1000);
+            rightFrontDrive.setVelocity(-1000);
 
         }
 
-        leftFrontDrive.setVelocity(600);
-        rightBackDrive.setVelocity(600);
-        leftBackDrive.setVelocity(600);
-        rightFrontDrive.setVelocity(600);
+        leftFrontDrive.setVelocity(1500);
+        rightBackDrive.setVelocity(1500);
+        leftBackDrive.setVelocity(1500);
+        rightFrontDrive.setVelocity(1500);
 
-        sleep(3500);
+        sleep(900);
 
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);
         leftBackDrive.setVelocity(0);
         rightFrontDrive.setVelocity(0);
+
+        rotateServo.setPosition(0);
+
+        sleep(500);
+
+        clawServo.setPosition(.8);
+        clawServo1.setPosition(0.2);
+
+        sleep(500);
+
+        leftFrontDrive.setVelocity(-100);
+        rightBackDrive.setVelocity(-100);
+        leftBackDrive.setVelocity(-100);
+        rightFrontDrive.setVelocity(-100);
+
+        sleep(300);
 
     }
 }

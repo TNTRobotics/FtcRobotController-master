@@ -21,11 +21,13 @@ public class RedClose extends LinearOpMode {
     @Override
     public void runOpMode() {
 //setting up motors for auto
+
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
 
 
         waitForStart();
+        imu.resetYaw();
         telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
         telemetry.update();
 
