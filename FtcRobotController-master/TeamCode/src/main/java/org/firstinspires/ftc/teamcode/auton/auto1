@@ -74,6 +74,7 @@ public class auto1 extends LinearOpMode {
             @Override
             public void onError(int errorCode){}
         });
+        /*
         leftFrontDrive = HardwareMap.dcMotor.get("leftFrontDrive");
         leftBackDrive = HardwareMap.dcMotor.get("leftFrontDrive");
         rightFrontDrive = HardwareMap.dcMotor.get("leftFrontDrive");
@@ -125,7 +126,7 @@ public class auto1 extends LinearOpMode {
 
 
 
-
+*/
         void telemetryUpdate(String message) {
 
             telemetry.update();
