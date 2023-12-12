@@ -201,7 +201,7 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
     /**
     This below updates the claws so that they close and open, left is left claw, and right is right claw.
      **/
-    public boolean updateGamepadServos(Gamepad gamepad2, boolean closeClaw, Config cfg) {
+    public boolean updateGamepadServos(Gamepad gamepad2,Gamepad gamepad1, boolean closeClaw, Config cfg) {
         if (gamepad2.left_trigger !=0) {
             cfg.getClawServo().setPosition(.7);
             closeClaw = true;
@@ -216,6 +216,14 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
         }
         if(gamepad2.right_bumper){
             cfg.getClawServo1().setPosition(0);
+            closeClaw = false;
+        }
+        if(gamepad1.right_trigger !=0){
+            cfg.getPlane().setPosition(1);
+            closeClaw = true;
+        }
+        if(gamepad1.right_bumper){
+            cfg.getPlane().setPosition(.7);
             closeClaw = false;
         }
         // END OF CLAW 1

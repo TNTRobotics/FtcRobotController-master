@@ -38,7 +38,7 @@ public class DriveInit {
         Servo clawServo;
         Servo clawServo1;
         Servo rotateServo;
-
+        Servo plane;
 
         double speedMultiplier = 1;
 
@@ -70,6 +70,8 @@ public class DriveInit {
         clawServo1.setPosition(0);
         rotateServo = hwMap.get(Servo.class, "rotateServo");
         rotateServo.setPosition(.63);
+        plane = hwMap.get(Servo.class, "plane");
+        plane.setPosition(.6);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -141,6 +143,7 @@ public class DriveInit {
         cfg.setClawServo(clawServo);
         cfg.setClawServo1(clawServo1);
         cfg.setRotateServo(rotateServo);
+        cfg.setPlane(plane);
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
 

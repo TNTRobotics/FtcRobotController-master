@@ -46,6 +46,7 @@ public class Config {
     Servo clawServo;
     Servo clawServo1;
     Servo rotateServo;
+    Servo plane;
 
 
     // Servos Misc
@@ -134,6 +135,10 @@ public class Config {
     public int getPivotPosition() {return pivotPosition;}
 
     public void setPivotPosition(int pivotPosition) {this.pivotPosition = pivotPosition;}
+
+    public Servo getPlane() {return plane;}
+    public void setPlane(Servo plane) {this.plane = plane;}
+
 
 
 

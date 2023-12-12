@@ -26,20 +26,10 @@ public class BlueClose extends LinearOpMode {
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
 
 
-        imu.resetYaw();
-        telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
-        telemetry.update();
-        //servo init
-
-        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
-        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
-        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
-        clawServo.setPosition(1);
-        clawServo1.setPosition(0);
-        rotateServo.setPosition(.63);
 
 
-        //motor init
+
+        //motor init for driving
         DcMotorEx leftFrontDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "leftFront");
         DcMotorEx leftBackDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "leftRear");
         DcMotorEx rightFrontDrive = (DcMotorEx) hardwareMap.get(DcMotor.class, "rightFront");
@@ -52,11 +42,35 @@ public class BlueClose extends LinearOpMode {
         rightBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //slide and pivot motor init
+        DcMotorEx slide1Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "slide1Motor");
+        DcMotorEx pivot2Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivot2Motor");
+        DcMotorEx pivotMotor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivotMotor");
+        // run with encoders
+        slide1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        pivot2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        slide1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        pivot2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //servo init
+
+        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
+        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
+        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
+        clawServo.setPosition(1);
+        clawServo1.setPosition(0);
+        rotateServo.setPosition(.63);
+
+        waitForStart();
+
         imu.resetYaw();
         telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
         telemetry.update();
 
-        waitForStart();
+
 
         leftFrontDrive.setVelocity(1000);
         rightBackDrive.setVelocity(1000);
@@ -80,7 +94,7 @@ public class BlueClose extends LinearOpMode {
         leftBackDrive.setVelocity(1500);
         rightFrontDrive.setVelocity(1500);
 
-        sleep(900);
+        sleep(800);
 
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);
@@ -90,6 +104,8 @@ public class BlueClose extends LinearOpMode {
         rotateServo.setPosition(0);
 
         sleep(500);
+
+
 
         clawServo.setPosition(.8);
         clawServo1.setPosition(0.2);
