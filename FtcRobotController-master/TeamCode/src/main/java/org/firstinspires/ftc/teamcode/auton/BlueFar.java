@@ -89,10 +89,29 @@ public class BlueFar extends LinearOpMode {
 
         sleep(6800);
 
+
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);
         leftBackDrive.setVelocity(0);
         rightFrontDrive.setVelocity(0);
+
+        rotateServo.setPosition(0);
+
+        sleep(500);
+
+
+
+        clawServo.setPosition(.8);
+        clawServo1.setPosition(0.2);
+
+        sleep(500);
+
+        leftFrontDrive.setVelocity(-100);
+        rightBackDrive.setVelocity(-100);
+        leftBackDrive.setVelocity(-100);
+        rightFrontDrive.setVelocity(-100);
+
+        sleep(300);
 
     }
 }
