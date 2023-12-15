@@ -30,6 +30,7 @@ Set positions for the pivot motor code. Just makes life easier.
     int pivotPos = 0;
 
 
+
     /**
 Sets up chassis drive and what each motor will be doing.
      **/
@@ -77,6 +78,18 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
         if (gamepad1.circle) {
             cfg.setSpeedMultiplier(.25);
         }
+        if (gamepad1.dpad_up){
+            cfg.getClimb().setPower(1);
+        }
+        if (gamepad1.dpad_down){
+            cfg.getClimb().setPower(-1);
+        }
+        if (gamepad1.dpad_right){
+        cfg.getClimb().setPower(0);
+    }
+
+
+
 
     }
 

@@ -34,6 +34,7 @@ public class DriveInit {
         DcMotor slide1Motor;
         DcMotor pivotMotor;
         DcMotor pivot2Motor;
+        DcMotor climb;
 //DcMotor slide2Motor = null;
         Servo clawServo;
         Servo clawServo1;
@@ -54,6 +55,7 @@ public class DriveInit {
         slide1Motor = hwMap.get(DcMotor.class, "s1");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
         pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
         pivot2Motor = hwMap.get(DcMotor.class, "pivot2Motor");
+        climb = hwMap.get(DcMotor.class, "climb");
        /* slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
 
@@ -98,6 +100,9 @@ public class DriveInit {
         pivot2Motor.setDirection(DcMotorSimple.Direction.FORWARD);
         pivot2Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        climb.setDirection(DcMotorSimple.Direction.FORWARD);
+        climb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         /*
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elbowMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -111,6 +116,8 @@ public class DriveInit {
         pivotMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pivot2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivot2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        climb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        climb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
@@ -137,6 +144,7 @@ public class DriveInit {
         cfg.setSlide1Motor(slide1Motor);
         cfg.setPivotMotor(pivotMotor);
         cfg.setPivot2Motor(pivot2Motor);
+        cfg.setClimb(climb);
        // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
@@ -146,6 +154,7 @@ public class DriveInit {
         cfg.setPlane(plane);
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
+        cfg.climbPower = 0;
 
 
 

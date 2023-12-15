@@ -19,6 +19,8 @@ public class Config {
 
 
     public int slidesPower;
+
+    public int climbPower;
     // Motors (left front drive, left back drive, right front drive, right back drive)
     DcMotor lfD = null;
     DcMotor lbD = null;
@@ -29,6 +31,8 @@ public class Config {
     public int pivotPower;
     DcMotor pivotMotor = null;
     DcMotor pivot2Motor = null;
+
+    DcMotor climb = null;
     //DcMotor slide2Motor = null;
 
     // Runtime
@@ -93,14 +97,21 @@ public class Config {
     public DcMotor getSlide1Motor() {
         return slide1Motor;
     }
-    
+
+    public void setClimb(DcMotor climb) {
+        this.climb = climb;
+    }
+    public DcMotor getClimb(){
+        return climb;
+    }
+
     /*
-        public DcMotor getSlide2Motor() {
-            return slide2Motor;
-        }
-    
-        public void setSlide2Motor(DcMotor slide2Motor) {this.slide2Motor = slide2Motor;}
-    */
+            public DcMotor getSlide2Motor() {
+                return slide2Motor;
+            }
+
+            public void setSlide2Motor(DcMotor slide2Motor) {this.slide2Motor = slide2Motor;}
+        */
     public ElapsedTime getrTime() {
         return rTime;
     }
