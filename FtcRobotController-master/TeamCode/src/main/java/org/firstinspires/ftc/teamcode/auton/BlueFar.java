@@ -24,7 +24,7 @@ public class BlueFar extends LinearOpMode {
 //setting up motors for auto
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
-
+/*
         //slide and pivot motor init
         DcMotorEx slide1Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "slide1Motor");
         DcMotorEx pivot2Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivot2Motor");
@@ -37,6 +37,8 @@ public class BlueFar extends LinearOpMode {
         slide1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivot2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+ */
 
         //servo init
 

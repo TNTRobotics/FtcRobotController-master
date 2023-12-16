@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Config;
 
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -27,7 +28,7 @@ public class Config {
     DcMotor rfD = null;
     DcMotor rbD = null;
 
-    DcMotor slide1Motor = null;
+    public DcMotor slide1Motor = null; //temp public for testing
     public int pivotPower;
     DcMotor pivotMotor = null;
     DcMotor pivot2Motor = null;
@@ -51,11 +52,12 @@ public class Config {
     Servo clawServo1;
     Servo rotateServo;
     Servo plane;
+    public CRServo sclimb;
 
 
     // Servos Misc
     final double INCREMENT   = 0.01;     // amount to slew servo each CYCLE_MS cycle
-
+    final double SINCREMENT = .5;
     // targetPos
      int slide1MotorTargetPosition = 0;
    // int slide2MotorTargetPosition = 0;
@@ -94,9 +96,9 @@ public class Config {
         this.rbD = rbD;
     }
 
-    public DcMotor getSlide1Motor() {
+    /*public DcMotor getSlide1Motor() {
         return slide1Motor;
-    }
+    }*/
 
     public void setClimb(DcMotor climb) {
         this.climb = climb;
@@ -126,9 +128,9 @@ public class Config {
 
     public void setSpeedMultiplier(double speedMultiplier) {this.speedMultiplier = speedMultiplier;}
 
-    public void setSlide1Motor(DcMotor slide1Motor) {
+    /*public void setSlide1Motor(DcMotor slide1Motor) {
         this.slide1Motor = slide1Motor;
-    }
+    }*/
 
     public void setPivotMotor(DcMotor pivotMotor) {
         this.pivotMotor = pivotMotor;
@@ -150,8 +152,8 @@ public class Config {
     public Servo getPlane() {return plane;}
     public void setPlane(Servo plane) {this.plane = plane;}
 
-
-
+/*    public CRServo getSclimb() {return sclimb;}
+    public void setSclimb(CRServo sclimb) {this.sclimb = sclimb;}*/
 
     public Servo getClawServo() {
         return clawServo;
@@ -188,6 +190,7 @@ public DcMotor getPivotMotor() {return pivotMotor;}
 
 
     public double getINCREMENT() {return INCREMENT;}
+    public double getSINCREMENT() {return SINCREMENT;}
 
     public int getSlide1MotorTargetPosition() {return slide1MotorTargetPosition;}
 

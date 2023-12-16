@@ -41,7 +41,7 @@ public class BlueClose extends LinearOpMode {
         rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-
+/*
         //slide and pivot motor init
         DcMotorEx slide1Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "slide1Motor");
         DcMotorEx pivot2Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivot2Motor");
@@ -54,6 +54,8 @@ public class BlueClose extends LinearOpMode {
         slide1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivot2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+ */
 
         //servo init
 

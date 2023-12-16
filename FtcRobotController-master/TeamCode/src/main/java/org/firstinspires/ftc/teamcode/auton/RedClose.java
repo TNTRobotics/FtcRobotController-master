@@ -26,6 +26,7 @@ public class RedClose extends LinearOpMode {
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
         //slide and pivot motor init
+        /*
         DcMotorEx slide1Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "slide1Motor");
         DcMotorEx pivot2Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivot2Motor");
         DcMotorEx pivotMotor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivotMotor");
@@ -37,6 +38,8 @@ public class RedClose extends LinearOpMode {
         slide1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivot2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+         */
 
         //servo init
 
@@ -71,7 +74,7 @@ public class RedClose extends LinearOpMode {
         leftBackDrive.setVelocity(600);
         rightFrontDrive.setVelocity(600);
 
-        sleep(500);
+        sleep(400);
 
         while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+84)>1){
 
@@ -87,9 +90,8 @@ public class RedClose extends LinearOpMode {
         leftBackDrive.setVelocity(600);
         rightFrontDrive.setVelocity(600);
 
-        sleep(3500);
+        sleep(2500);
 
-        sleep(800);
 
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);

@@ -25,7 +25,7 @@ public class RedFar extends LinearOpMode {
         imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
 
-        //slide and pivot motor init
+      /*  //slide and pivot motor init
         DcMotorEx slide1Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "slide1Motor");
         DcMotorEx pivot2Motor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivot2Motor");
         DcMotorEx pivotMotor = (DcMotorEx) hardwareMap.get(DcMotor.class, "pivotMotor");
@@ -37,6 +37,8 @@ public class RedFar extends LinearOpMode {
         slide1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivot2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+       */
 
         //servo init
 
@@ -65,20 +67,20 @@ public class RedFar extends LinearOpMode {
         telemetry.addData("Robot Angle", Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-90));
         telemetry.update();
 
-        leftFrontDrive.setVelocity(300);
-        rightBackDrive.setVelocity(300);
-        leftBackDrive.setVelocity(300);
-        rightFrontDrive.setVelocity(300);
+        leftFrontDrive.setVelocity(2000);
+        rightBackDrive.setVelocity(2000);
+        leftBackDrive.setVelocity(2000);
+        rightFrontDrive.setVelocity(2000);
 
-        sleep(7800);
+        sleep(1150);
 
 
-        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+84)>1){
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+76)>1){
 
-            leftFrontDrive.setVelocity(-300);
-            rightBackDrive.setVelocity(300);
-            leftBackDrive.setVelocity(-300);
-            rightFrontDrive.setVelocity(300);
+            leftFrontDrive.setVelocity(-1000);
+            rightBackDrive.setVelocity(1000);
+            leftBackDrive.setVelocity(-1000);
+            rightFrontDrive.setVelocity(1000);
 
         }
 
@@ -88,8 +90,6 @@ public class RedFar extends LinearOpMode {
         rightFrontDrive.setVelocity(600);
 
         sleep(6800);
-
-        sleep(800);
 
         leftFrontDrive.setVelocity(0);
         rightBackDrive.setVelocity(0);

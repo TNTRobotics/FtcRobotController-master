@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Config;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -40,6 +41,7 @@ public class DriveInit {
         Servo clawServo1;
         Servo rotateServo;
         Servo plane;
+        CRServo sclimb;
 
         double speedMultiplier = 1;
 
@@ -56,16 +58,9 @@ public class DriveInit {
         pivotMotor = hwMap.get(DcMotor.class, "pivotMotor");
         pivot2Motor = hwMap.get(DcMotor.class, "pivot2Motor");
         climb = hwMap.get(DcMotor.class, "climb");
-       /* slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
-
+       // slide2Motor = hwMap.get(DcMotor.class, "s2");//slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         // ASSIGN SERVOS
-
-
-
-
-
-        */
         clawServo = hwMap.get(Servo.class, "clawServo");
         clawServo.setPosition(1);
         clawServo1 = hwMap.get(Servo.class, "clawServo1");
@@ -73,7 +68,9 @@ public class DriveInit {
         rotateServo = hwMap.get(Servo.class, "rotateServo");
         rotateServo.setPosition(.63);
         plane = hwMap.get(Servo.class, "plane");
-        plane.setPosition(.6);
+        plane.setPosition(.8);
+        sclimb = hwMap.get(CRServo.class, "sclimb");
+        sclimb.setPower(0);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -119,12 +116,7 @@ public class DriveInit {
         climb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         climb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   /*      slide2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-
         slide2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
          */
 
         // Setters
@@ -141,7 +133,7 @@ public class DriveInit {
         cfg.setRfD(rightFrontDrive);
         cfg.setRbD(rightBackDrive);
 
-        cfg.setSlide1Motor(slide1Motor);
+        cfg.slide1Motor=slide1Motor;
         cfg.setPivotMotor(pivotMotor);
         cfg.setPivot2Motor(pivot2Motor);
         cfg.setClimb(climb);
@@ -155,6 +147,7 @@ public class DriveInit {
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
         cfg.climbPower = 0;
+        cfg.sclimb = sclimb;
 
 
 
