@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@Autonomous(name = "Red Far")
+@Autonomous(name = "Red Far \uD83D\uDFE5")
 public class RedFar extends LinearOpMode {
 
     private IMU imu;

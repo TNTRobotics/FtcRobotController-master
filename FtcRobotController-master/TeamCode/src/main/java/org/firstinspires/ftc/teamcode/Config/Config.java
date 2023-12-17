@@ -30,10 +30,10 @@ public class Config {
 
     public DcMotor slide1Motor = null; //temp public for testing
     public int pivotPower;
-    DcMotor pivotMotor = null;
-    DcMotor pivot2Motor = null;
+    public DcMotor pivotMotor = null;
+    public DcMotor pivot2Motor = null;
 
-    DcMotor climb = null;
+    public DcMotor climb = null;
     //DcMotor slide2Motor = null;
 
     // Runtime
@@ -48,10 +48,10 @@ public class Config {
     int pivotPosition = 0;
 
     // Claw (A1 - Claw, A2 - 180 turn, A3 - Pivot turn)
-    Servo clawServo;
-    Servo clawServo1;
-    Servo rotateServo;
-    Servo plane;
+    public Servo clawServo;
+    public Servo clawServo1;
+    public Servo rotateServo;
+    public Servo plane;
     public CRServo sclimb;
 
 
@@ -96,24 +96,7 @@ public class Config {
         this.rbD = rbD;
     }
 
-    /*public DcMotor getSlide1Motor() {
-        return slide1Motor;
-    }*/
 
-    public void setClimb(DcMotor climb) {
-        this.climb = climb;
-    }
-    public DcMotor getClimb(){
-        return climb;
-    }
-
-    /*
-            public DcMotor getSlide2Motor() {
-                return slide2Motor;
-            }
-
-            public void setSlide2Motor(DcMotor slide2Motor) {this.slide2Motor = slide2Motor;}
-        */
     public ElapsedTime getrTime() {
         return rTime;
     }
@@ -128,18 +111,6 @@ public class Config {
 
     public void setSpeedMultiplier(double speedMultiplier) {this.speedMultiplier = speedMultiplier;}
 
-    /*public void setSlide1Motor(DcMotor slide1Motor) {
-        this.slide1Motor = slide1Motor;
-    }*/
-
-    public void setPivotMotor(DcMotor pivotMotor) {
-        this.pivotMotor = pivotMotor;
-    }
-
-    public void setPivot2Motor(DcMotor pivot2Motor) {
-        this.pivot2Motor = pivot2Motor;
-    }
-
 
     public int getSlide1Position() {return slide1Position;}
 
@@ -148,45 +119,6 @@ public class Config {
     public int getPivotPosition() {return pivotPosition;}
 
     public void setPivotPosition(int pivotPosition) {this.pivotPosition = pivotPosition;}
-
-    public Servo getPlane() {return plane;}
-    public void setPlane(Servo plane) {this.plane = plane;}
-
-/*    public CRServo getSclimb() {return sclimb;}
-    public void setSclimb(CRServo sclimb) {this.sclimb = sclimb;}*/
-
-    public Servo getClawServo() {
-        return clawServo;
-    }
-
-    public void setClawServo(Servo clawServo) {
-        this.clawServo = clawServo;
-    }
-
-    public Servo getClawServo1(){
-        return clawServo1;
-    }
-    public void setClawServo1(Servo clawServo1){
-        this.clawServo1 = clawServo1;
-    }
-
-    public Servo getRotateServo() {
-        return rotateServo;
-    }
-
-    public void setRotateServo(Servo rotateServo) {
-        this.rotateServo = rotateServo;
-    }
-
-   /*
-    public int getSlide2MotorTargetPosition() {return slide2MotorTargetPosition;}
-
- */
-public DcMotor getPivotMotor() {return pivotMotor;}
-
-    public DcMotor getPivot2Motor() {
-        return pivot2Motor;
-    }
 
 
     public double getINCREMENT() {return INCREMENT;}

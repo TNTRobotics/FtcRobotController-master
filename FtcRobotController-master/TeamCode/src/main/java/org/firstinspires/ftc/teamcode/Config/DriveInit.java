@@ -70,7 +70,6 @@ public class DriveInit {
         plane = hwMap.get(Servo.class, "plane");
         plane.setPosition(.8);
         sclimb = hwMap.get(CRServo.class, "sclimb");
-        sclimb.setPower(0);
 
         // DRIVE MOTOR DIRECTION
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -134,16 +133,16 @@ public class DriveInit {
         cfg.setRbD(rightBackDrive);
 
         cfg.slide1Motor=slide1Motor;
-        cfg.setPivotMotor(pivotMotor);
-        cfg.setPivot2Motor(pivot2Motor);
-        cfg.setClimb(climb);
+        cfg.pivotMotor = pivotMotor;
+        cfg.pivot2Motor = pivot2Motor;
+        cfg.climb = climb;
        // cfg.setSlide2Motor(slide2Motor);
 
         // Servos
-        cfg.setClawServo(clawServo);
-        cfg.setClawServo1(clawServo1);
-        cfg.setRotateServo(rotateServo);
-        cfg.setPlane(plane);
+        cfg.clawServo = clawServo;
+        cfg.clawServo1 = clawServo1;
+        cfg.rotateServo = rotateServo;
+        cfg.plane = plane;
         cfg.slidesPower = 0;
         cfg.pivotPower = 0;
         cfg.climbPower = 0;

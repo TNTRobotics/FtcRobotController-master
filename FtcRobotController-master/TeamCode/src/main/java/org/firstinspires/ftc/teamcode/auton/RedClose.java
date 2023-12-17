@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@Autonomous(name = "Red Close")
+@Autonomous(name = "Red Close \uD83D\uDFE5")
 public class RedClose extends LinearOpMode {
 
     private IMU imu;

@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@Autonomous(name = "Blue Close")
+@Autonomous(name = "Blue Close \uD83D\uDFE6")
 public class BlueClose extends LinearOpMode {
 
     private IMU imu;
@@ -59,9 +59,9 @@ public class BlueClose extends LinearOpMode {
 
         //servo init
 
-        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
-        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
-        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
+        Servo clawServo = hardwareMap.get(Servo.class, "clawServo");
+        Servo clawServo1 = hardwareMap.get(Servo.class, "clawServo1");
+        Servo rotateServo = hardwareMap.get(Servo.class, "rotateServo");
         clawServo.setPosition(1);
         clawServo1.setPosition(0);
         rotateServo.setPosition(.63);

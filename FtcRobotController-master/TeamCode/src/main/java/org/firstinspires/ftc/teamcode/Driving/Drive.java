@@ -177,7 +177,7 @@ public class Drive extends LinearOpMode {
 
             */
 
-            telemetry.addData("Power: ", cfg.getPivotMotor().getPower());
+            telemetry.addData("Power: ", cfg.pivotMotor.getPower());
             telemetry.addData("Power: ", cfg.slide1Motor.getPower());
             telemetry.addData("Loop timer", "%4.2f", cfg.getrTime().milliseconds() - loopTime);
             loopTime = cfg.getrTime().milliseconds();

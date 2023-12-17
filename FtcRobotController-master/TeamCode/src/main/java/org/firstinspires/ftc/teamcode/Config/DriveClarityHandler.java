@@ -79,12 +79,12 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
             cfg.setSpeedMultiplier(.25);
         }
         if (gamepad1.left_bumper) {
-            cfg.getClimb().setPower(-1);
+            cfg.climb.setPower(-1);
         }
             else {
-            cfg.getClimb().setPower(0);
+            cfg.climb.setPower(0);
         }
-        if (gamepad1.dpad_up) {
+/*        if (gamepad1.dpad_up) {
             cfg.sclimb.setPower(1);
         }
         else {
@@ -95,8 +95,16 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
         }
         else {
             cfg.sclimb.setPower(0);
+        }*/
+        if(gamepad1.dpad_up){
+            cfg.sclimb.setPower(1);
         }
-
+        else if (gamepad1.dpad_down){
+            cfg.sclimb.setPower(-1);
+        }
+        else{
+            cfg.sclimb.setPower(0);
+        }
 
     }
 
@@ -117,7 +125,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          **/
         double slidesPower = -gamepad2.left_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
-        int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
+        int armNewPos = (int) (cfg.slide1Motor.getCurrentPosition() + slidesPower);
         if (armNewPos < -2200) {
             armNewPos = -2200;
         }
@@ -134,7 +142,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
                  **/
         double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.slide1Motor.getCurrentPosition());
-        double currentPivotPID = pivotPID.getOutputFromError(pivotPos,  cfg.getPivotMotor().getCurrentPosition());
+        double currentPivotPID = pivotPID.getOutputFromError(pivotPos,  cfg.pivotMotor.getCurrentPosition());
         /**
         Dpad up here makes the pivot motor go to preset position 2, then 1 so that the slides don't hit anything on the floor. This also will help with a more peaceful transition
          from the lowest point of the pivot to the highest point. After that, the linear slides extend to the max hight allowed, and the pivot servo turns to the other side
@@ -143,7 +151,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (gamepad2.dpad_up) {
             pivotPos = 160;
             armNewPos = -900;
-            cfg.getRotateServo().setPosition(.63);
+            cfg.rotateServo.setPosition(.63);
         }
         /**
         This just raises the linear slide to halfway.
@@ -157,7 +165,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (gamepad2.dpad_right) {
             armNewPos = 50;
             pivotPos = 80;
-            cfg.getRotateServo().setPosition(.6);
+            cfg.rotateServo.setPosition(.6);
         }
         /**
 This moves the linear slides to the minimum positions so that the arm can safley go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -172,9 +180,9 @@ This moves the linear slides to the minimum positions so that the arm can safley
          */
         if (gamepad2.square){
             pivotPos = 51;
-            cfg.getClawServo1().setPosition(.2);
-            cfg.getClawServo().setPosition(.8);
-            cfg.getRotateServo().setPosition(0);
+            cfg.clawServo1.setPosition(.2);
+            cfg.clawServo.setPosition(.8);
+            cfg.rotateServo.setPosition(0);
             closeClaw = true;
         }
 
@@ -186,8 +194,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         cfg.slide1Motor.setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.getPivotMotor().setPower(currentPivotPID * .6);
-        cfg.getPivot2Motor().setPower(currentPivotPID * .6);
+        cfg.pivotMotor.setPower(currentPivotPID * .6);
+        cfg.pivot2Motor.setPower(currentPivotPID * .6);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 
@@ -223,26 +231,26 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
      **/
     public boolean updateGamepadServos(Gamepad gamepad2,Gamepad gamepad1, boolean closeClaw, Config cfg) {
         if (gamepad2.left_trigger !=0) {
-            cfg.getClawServo().setPosition(.7);
+            cfg.clawServo.setPosition(.7);
             closeClaw = true;
         }
         if (gamepad2.left_bumper) {
-            cfg.getClawServo().setPosition(1);
+            cfg.clawServo.setPosition(1);
             closeClaw = false;
         }
         if(gamepad2.right_trigger !=0){
-            cfg.getClawServo1().setPosition(0.3);
+            cfg.clawServo1.setPosition(0.3);
             closeClaw = true;
         }
         if(gamepad2.right_bumper){
-            cfg.getClawServo1().setPosition(0);
+            cfg.clawServo1.setPosition(0);
             closeClaw = false;
         }
         if(gamepad1.right_trigger !=0){
-            cfg.getPlane().setPosition(1);
+            cfg.plane.setPosition(1);
         }
         if(gamepad1.right_bumper){
-            cfg.getPlane().setPosition(.8);
+            cfg.plane.setPosition(.8);
         }
         // END OF CLAW 1
         /**
@@ -250,10 +258,10 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         // START OF CLAW 2 (180 turn around)
         if (gamepad2.circle ) {
-           cfg.getRotateServo().setPosition(0.0);
+           cfg.rotateServo.setPosition(0.0);
         }
         if (gamepad2.triangle) {
-                cfg.getRotateServo().setPosition(0.63);
+                cfg.rotateServo.setPosition(0.63);
         }
         // END OF CLAW 2
 
