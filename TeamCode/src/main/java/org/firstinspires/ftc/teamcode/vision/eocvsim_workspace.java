@@ -1,0 +1,8 @@
+/*{
+        "sourcesPath": ".",
+        "resourcesPath": ".",
+        "excludedPaths": [],
+        "excludedFileExtensions": []
+        }
+
+ */
