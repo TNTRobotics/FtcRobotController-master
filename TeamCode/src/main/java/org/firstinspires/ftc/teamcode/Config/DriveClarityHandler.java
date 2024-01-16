@@ -81,6 +81,9 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
         if (gamepad1.left_bumper) {
             cfg.climb.setPower(-1);
         }
+        else if(gamepad1.dpad_left){
+            cfg.climb.setPower(.75);
+        }
             else {
             cfg.climb.setPower(0);
         }
@@ -97,10 +100,10 @@ Actual configuration for the speed which can be max, 75%, 50%, and 25%.
             cfg.sclimb.setPower(0);
         }*/
         if(gamepad1.dpad_up){
-            cfg.sclimb.setPower(1);
+            cfg.sclimb.setPower(-.35);
         }
         else if (gamepad1.dpad_down){
-            cfg.sclimb.setPower(-1);
+            cfg.sclimb.setPower(1);
         }
         else{
             cfg.sclimb.setPower(0);
@@ -150,14 +153,16 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          **/
         if (gamepad2.dpad_up) {
             pivotPos = 160;
-            armNewPos = -900;
+            armNewPos = -1500;
             cfg.rotateServo.setPosition(.63);
         }
         /**
         This just raises the linear slide to halfway.
          **/
         if (gamepad2.dpad_left) {
-            armNewPos = -1400;
+            pivotPos = 160;
+            armNewPos = -700;
+            cfg.rotateServo.setPosition(.63);
         }
         /**
          This moves the slides out ever so slightly.
@@ -168,7 +173,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
             cfg.rotateServo.setPosition(.6);
         }
         /**
-This moves the linear slides to the minimum positions so that the arm can safley go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
+This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
          position. This will keep it from breaking anything. The claw then flips to the other side of the slide to be ready to pick up the pixels again.
          **/
         if (gamepad2.dpad_down) {
@@ -176,7 +181,7 @@ This moves the linear slides to the minimum positions so that the arm can safley
             pivotPos = 0;
         }
         /**
-         * This will move up the linear slide so that we could nock over the pixel stacks easily without any problems.
+         * This will move up the linear slide so that we could knock over the pixel stacks easily without any problems.
          */
         if (gamepad2.square){
             pivotPos = 51;

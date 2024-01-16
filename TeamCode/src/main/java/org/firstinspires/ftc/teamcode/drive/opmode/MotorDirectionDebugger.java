@@ -38,8 +38,9 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
  *
  * Uncomment the @Disabled tag below to use this opmode.
  */
-@Disabled
+//@Disabled
 @Config
+@Disabled
 @TeleOp(group = "drive")
 public class MotorDirectionDebugger extends LinearOpMode {
     public static double MOTOR_POWER = 0.7;
@@ -73,15 +74,19 @@ public class MotorDirectionDebugger extends LinearOpMode {
             if(gamepad1.x) {
                 drive.setMotorPowers(MOTOR_POWER, 0, 0, 0);
                 telemetry.addLine("Running Motor: Front Left");
+                telemetry.addData("encoferlf", drive.leftFront.getCurrentPosition());
             } else if(gamepad1.y) {
                 drive.setMotorPowers(0, 0, 0, MOTOR_POWER);
                 telemetry.addLine("Running Motor: Front Right");
+                telemetry.addData("encoferrf", drive.rightFront.getCurrentPosition());
             } else if(gamepad1.b) {
                 drive.setMotorPowers(0, 0, MOTOR_POWER, 0);
                 telemetry.addLine("Running Motor: Rear Right");
+                telemetry.addData("encofer", drive.rightRear.getCurrentPosition());
             } else if(gamepad1.a) {
                 drive.setMotorPowers(0, MOTOR_POWER, 0, 0);
                 telemetry.addLine("Running Motor: Rear Left");
+                telemetry.addData("encofer", drive.leftRear.getCurrentPosition());
             } else {
                 drive.setMotorPowers(0, 0, 0, 0);
                 telemetry.addLine("Running Motor: None");
