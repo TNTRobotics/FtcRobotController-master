@@ -138,8 +138,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (pivotPos < -10) {
             pivotPos = -10;
         }
-        if (pivotPos > 160) {
-            pivotPos = 160;
+        if (pivotPos > 150) {
+            pivotPos = 150;
         }
         /**
         Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
@@ -152,7 +152,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 160;
+            pivotPos = 150;
             armNewPos = -1500;
             cfg.rotateServo.setPosition(.63);
         }
@@ -160,7 +160,7 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         This just raises the linear slide to halfway.
          **/
         if (gamepad2.dpad_left) {
-            pivotPos = 160;
+            pivotPos = 150;
             armNewPos = -700;
             cfg.rotateServo.setPosition(.63);
         }
