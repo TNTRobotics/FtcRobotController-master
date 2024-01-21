@@ -129,8 +129,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         double slidesPower = -gamepad2.left_stick_y * 10;
         int pivotPos = (int) (cfg.getPivotPosition() + pivotPower);
         int armNewPos = (int) (cfg.getSlide1Position() + slidesPower);
-        if (armNewPos < -2200) {
-            armNewPos = -2200;
+        if (armNewPos < -2000) {
+            armNewPos = -2000;
         }
         if (armNewPos > 0) {
             armNewPos = 0;
@@ -138,8 +138,8 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
         if (pivotPos < -10) {
             pivotPos = -10;
         }
-        if (pivotPos > 150) {
-            pivotPos = 150;
+        if (pivotPos > 1100) {
+            pivotPos = 1100;
         }
         /**
         Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
@@ -152,24 +152,24 @@ For the pivot motor here, we might want to slow it down ever so slightly (not th
          to be able to drop the pixels on the board.
          **/
         if (gamepad2.dpad_up) {
-            pivotPos = 150;
-            armNewPos = -1500;
+            pivotPos = 1100;
+            armNewPos = -1200;
             cfg.rotateServo.setPosition(.63);
         }
         /**
         This just raises the linear slide to halfway.
          **/
-        if (gamepad2.dpad_left) {
-            pivotPos = 150;
+        if (gamepad2.dpad_right) {
+            pivotPos = 1100;
             armNewPos = -700;
             cfg.rotateServo.setPosition(.63);
         }
         /**
          This moves the slides out ever so slightly.
          **/
-        if (gamepad2.dpad_right) {
-            armNewPos = 50;
-            pivotPos = 80;
+        if (gamepad2.dpad_left) {
+            armNewPos = -1800;
+            pivotPos = 1100;
             cfg.rotateServo.setPosition(.6);
         }
         /**
@@ -199,8 +199,8 @@ This here, we have yet to figure out exactly what it does. It maybe just configu
          **/
         cfg.slide1Motor.setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.pivotMotor.setPower(currentPivotPID * .6);
-        cfg.pivot2Motor.setPower(currentPivotPID * .6);
+        cfg.pivotMotor.setPower(currentPivotPID * 1);
+        cfg.pivot2Motor.setPower(currentPivotPID * 1);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 

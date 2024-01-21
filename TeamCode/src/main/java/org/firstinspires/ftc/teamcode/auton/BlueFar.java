@@ -100,6 +100,14 @@ public class BlueFar extends LinearOpMode {
         rotateServo.setPosition(0);
 
         sleep(500);
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)-264)>1){
+
+            leftFrontDrive.setVelocity(300);
+            rightBackDrive.setVelocity(-300);
+            leftBackDrive.setVelocity(300);
+            rightFrontDrive.setVelocity(-300);
+
+        }
 
 
 

@@ -99,6 +99,14 @@ public class RedFar extends LinearOpMode {
         rotateServo.setPosition(0);
 
         sleep(500);
+        while(Math.abs(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES)+286)>1){
+
+            leftFrontDrive.setVelocity(-1000);
+            rightBackDrive.setVelocity(1000);
+            leftBackDrive.setVelocity(-1000);
+            rightFrontDrive.setVelocity(1000);
+
+        }
 
 
 
