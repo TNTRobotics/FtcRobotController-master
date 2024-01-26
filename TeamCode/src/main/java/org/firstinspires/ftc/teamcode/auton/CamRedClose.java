@@ -125,6 +125,7 @@ public class CamRedClose extends LinearOpMode {
                         rotateServo.setPosition(.63);
                     })
                     .strafeTo(new Vector2d(60, -40))
+                    //.waitSeconds(1)
                     .strafeTo(new Vector2d(50.5, -42))
 
                     .addTemporalMarker(9.5, () -> {

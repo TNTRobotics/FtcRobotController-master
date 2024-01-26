@@ -31,10 +31,10 @@ package org.firstinspires.ftc.teamcode.Driving;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
-//import org.firstinspires.ftc.teamcode.Config.PID;
-import org.firstinspires.ftc.teamcode.Config.DriveClarityHandler;
 import org.firstinspires.ftc.teamcode.Config.Config;
+import org.firstinspires.ftc.teamcode.Config.Drive1ClarityHandler;
 import org.firstinspires.ftc.teamcode.Config.DriveInit;
 import org.firstinspires.ftc.teamcode.misc.PID;
 
@@ -81,14 +81,18 @@ import org.firstinspires.ftc.teamcode.misc.PID;
 If I was you I wouldn't probably touch the things here unless something works horribly wrong, else if driver has no issue and everything works let this exist
  */
 
-@TeleOp(name="Drive", group="Driving")
+@TeleOp(name="MeDrive", group="Driving")
 
-public class Drive extends LinearOpMode {
+public class MeDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
+        Gamepad currentGamepad1 = new Gamepad();
+
+        Gamepad previousGamepad1 = new Gamepad();
+
         // Initialize configuration, drive initialization, and drive clarity handler objects
         Config cfg = new Config();
         DriveInit init = new DriveInit(cfg);
-        DriveClarityHandler driveClarityHandler = new DriveClarityHandler();
+        Drive1ClarityHandler driveClarityHandler = new Drive1ClarityHandler();
 
         // Create PID controller for slides
         PID slidesPID = new PID(.02,.0,.02,.008);
@@ -124,23 +128,23 @@ public class Drive extends LinearOpMode {
 
         // BEGIN CODE
         while (opModeIsActive()) {
-
+            previousGamepad1.copy(currentGamepad1);
+            currentGamepad1.copy(gamepad1);
             // Get joystick values for holonomic drive
             double axial = gamepad1.left_stick_y;
             double lateral = -gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
             // Update robot speed based on gamepad input
-            driveClarityHandler.updateRobotSpeed(gamepad1, cfg); //
 
             // Set holonomic drive motors based on joystick values
             driveClarityHandler.updateHolonomicDriveMotors(axial, lateral, yaw, cfg.getLfD(), cfg.getRfD(), cfg.getLbD(),cfg.getRbD(), cfg); //
 
             // Update slide motors based on gamepad input
-            driveClarityHandler.updateSlideMotors(gamepad2, pivotPID, slidesPID, closeClaw, cfg);
+            driveClarityHandler.updateSlideMotors(gamepad1, pivotPID, slidesPID, currentGamepad1,  previousGamepad1, closeClaw, cfg);
           //  driveClarityHandler.updatePivotMotor(gamepad2, pivotPID, cfg);
             // Update claw servos based on gamepad input
-            closeClaw = driveClarityHandler.updateGamepadServos(gamepad2, gamepad1, closeClaw, cfg);
+            closeClaw = driveClarityHandler.updateGamepadServos(gamepad1, currentGamepad1,  previousGamepad1, closeClaw, cfg);
 
          /*   // Update cone servos based on gamepad input
            double[] updatedServoValues = driveClarityHandler.updateConeServos(gamepad2, closeClaw, turnInit, turnInit2, pivotMotorTargetPosition, cfg);
