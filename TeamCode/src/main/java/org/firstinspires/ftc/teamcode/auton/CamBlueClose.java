@@ -10,13 +10,18 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Config.Config;
+import org.firstinspires.ftc.teamcode.Config.Drive1ClarityHandler;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.misc.PID;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.PlacementPosition;
 import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineBlueClose;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /*
  * This is an example of a more complex path to really test the tuning.
@@ -31,7 +36,9 @@ public class CamBlueClose extends LinearOpMode {
     private AprilTagProcessor aprilTag;              // Used for managing the AprilTag detection process.
     private AprilTagDetection desiredTag = null;     // Used to hold the data for a detected AprilTag
 
+    PID slidesPID = new PID(.02,.0,.02,.008);
 
+    PID pivotPID = new PID(.02, .0, .02, .008);
     private VisionPortal visionPortal2;
     private PropDetectionPipelineBlueClose propDetector;
 
@@ -68,6 +75,9 @@ public class CamBlueClose extends LinearOpMode {
         waitForStart();
 
         if (isStopRequested()) return;
+        AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+        Config cfg = new Config();
+        Drive1ClarityHandler drive1ClarityHandler = new Drive1ClarityHandler();
 
         PlacementPosition placementPosition = propDetector.getPlacementPosition();
 
@@ -88,13 +98,19 @@ public class CamBlueClose extends LinearOpMode {
                     })
 
 
-                    .turn(Math.toRadians(90))
+                    .turn(Math.toRadians(-90))
                     .strafeTo(new Vector2d(49, 29))
+                    .addTemporalMarker(5, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
+                    })
                     .addTemporalMarker(9.5, () -> {
                         rotateServo.setPosition(.22);
                     })
                     .addTemporalMarker(11, () -> {
                         clawServo.setPosition(.7);
+                    })
+                    .addTemporalMarker(12, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     .strafeTo(new Vector2d(45, 36))
                     .strafeTo(new Vector2d(47, 60))
@@ -172,8 +188,10 @@ public class CamBlueClose extends LinearOpMode {
                     drive.update();
                 }
             }
+        drive1ClarityHandler.updateSlideMotorsAuto(slidesPID, pivotPID, cfg, liftPosition.get(), telemetry);
 
 
-        }
+
+    }
     }
 

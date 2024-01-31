@@ -27,7 +27,7 @@ public class PropDetectionPipelineBlueClose implements VisionProcessor {
     double redAmount2 = 0;
 
     double redAmount3 = 0;
-    private final double redThreshold = 2500;
+    private final double redThreshold = 4000;
     private volatile PlacementPosition placementPosition = PlacementPosition.CENTER;
 
     public PropDetectionPipelineBlueClose() {
@@ -51,8 +51,8 @@ public class PropDetectionPipelineBlueClose implements VisionProcessor {
 
         // Define the coordinates of three rectangles
         // You need to adjust these coordinates based on your screen resolution
-        Rect rect1 = new Rect(10, 200, 100, 100);
-        Rect rect2 = new Rect(350, 230, 100, 100);
+        Rect rect1 = new Rect(160, 70, 100, 100);
+        Rect rect2 = new Rect(430, 60, 100, 100);
         Rect rect3 = new Rect(500, 230, 100, 100);
 
         // Draw rectangles on the output

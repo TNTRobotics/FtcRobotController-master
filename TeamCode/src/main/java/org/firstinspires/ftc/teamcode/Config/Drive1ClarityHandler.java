@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Config;
 
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.misc.PID;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -87,7 +88,7 @@ public class Drive1ClarityHandler {
          For the pivot motor here, we might want to slow it down ever so slightly (not the joystick part) like the chassis code is doing so that we do not have the whole robot shake. This
          will also simplify the code a lot.
          **/
-       // double slidesPower = -gamepad2.left_stick_y * 10;slidesPower
+        // double slidesPower = -gamepad2.left_stick_y * 10;slidesPower
         //double pivotPower = -gamepad2.right_stick_y * 4;pivotPower
         int pivotPos = (int) (cfg.getPivotPosition());
         int armNewPos = (int) (cfg.getSlide1Position());
@@ -113,7 +114,7 @@ public class Drive1ClarityHandler {
          from the lowest point of the pivot to the highest point. After that, the linear slides extend to the max hight allowed, and the pivot servo turns to the other side
          to be able to drop the pixels on the board.
          **/
-        if (currentGamepad1.left_stick_button && !previousGamepad1.left_stick_button){
+        if (currentGamepad1.left_stick_button && !previousGamepad1.left_stick_button) {
             setpos2 = !setpos2;
             if (setpos2) {
                 pivotPos = 1500;
@@ -158,18 +159,30 @@ public class Drive1ClarityHandler {
          */
         if (gamepad1.circle) {
             cfg.plane.setPosition(1);
-        }
-        else if (gamepad1.square) {
+        } else if (gamepad1.square) {
             cfg.climb.setPower(-1);
-        }
-        else if (gamepad1.triangle) {
-            cfg.sclimb.setPower(-.35);}
-        else{
+        } else if (gamepad1.triangle) {
+            cfg.sclimb.setPower(-.35);
+        } else {
             cfg.sclimb.setPower(0);
             cfg.climb.setPower(0);
         }
+        if (gamepad1.cross) {
+            cfg.rotateServo.setPosition(.63);
+        }
+        if (currentGamepad1.right_stick_button && !previousGamepad1.right_stick_button) {
+            clawMoved = !clawMoved;
+            if (clawMoved) {
+                cfg.rotateServo.setPosition(.63);
+                armNewPos = 0;
+                pivotPos = 0;
+            } else {
+                cfg.rotateServo.setPosition(0);
+                armNewPos = - 700;
+                pivotPos = 200;
 
-
+            }
+        }
 
         /**
          This here, we have yet to figure out exactly what it does. It maybe just configures the motors and servos again saying that they are not needed anymore until they are called.
@@ -211,14 +224,7 @@ public class Drive1ClarityHandler {
 
         }
 
-        if (currentGamepad1.right_stick_button && !previousGamepad1.right_stick_button) {
-            clawMoved = !clawMoved;
-            if (clawMoved) {
-                cfg.rotateServo.setPosition(.63);
-            } else {
-                cfg.rotateServo.setPosition(0);
-            }
-        }
+
 
        /* if (currentGamepad1.cross && !previousGamepad1.cross) {
             clawMoved = !clawMoved;
@@ -239,7 +245,8 @@ public class Drive1ClarityHandler {
         return closeClaw;
 
     }
-    public boolean updateSlideMotorsAuto(PID slidesPID, PID pivotPID, Config cfg, LIFT_POSITIONS targetPos) {
+
+    public boolean updateSlideMotorsAuto(PID slidesPID, PID pivotPID, Config cfg, LIFT_POSITIONS targetPos, Telemetry t) {
         /**
          This next part is making is so that the pivot motors and the linear slide motor can be controlled by the player through the joysticks. This also prevents either of them
          from going over a set limit so that nothing would break.
@@ -258,65 +265,73 @@ public class Drive1ClarityHandler {
         if (armNewPos > 0) {
             armNewPos = 0;
         }
-        if (pivotPos < -10) {
-            pivotPos = -10;
-        }
-        if (pivotPos > 1500) {
-            pivotPos = 1500;
-        }
 
-        /**
-         Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
-         **/
-        double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.slide1Motor.getCurrentPosition());
-        double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.pivotMotor.getCurrentPosition());
-        /**
-         Dpad up here makes the pivot motor go to preset position 2, then 1 so that the slides don't hit anything on the floor. This also will help with a more peaceful transition
-         from the lowest point of the pivot to the highest point. After that, the linear slides extend to the max hight allowed, and the pivot servo turns to the other side
-         to be able to drop the pixels on the board.
-         **/
+            if (pivotPos < -10) {
+                pivotPos = -10;
+            }
+            if (pivotPos > 1500) {
+                pivotPos = 1500;
+            }
 
-        if (targetPos == LIFT_POSITIONS.LEVEL_2) {
-            pivotPos = 1500;
-            armNewPos = -1200;
-            cfg.rotateServo.setPosition(.59);
-        }
-        /**
-         This just raises the linear slide to halfway.
-         **/
-        if (targetPos == LIFT_POSITIONS.LEVEL_1) {
-            pivotPos = 1500;
-            armNewPos = -800;
-            cfg.rotateServo.setPosition(.59);
-        }
-        /**
-         This moves the slides out ever so slightly.
-         **/
-        if (targetPos == LIFT_POSITIONS.LEVEL_3) {
-            armNewPos = -1800;
-            pivotPos = 1500;
-            cfg.rotateServo.setPosition(.59);
-        }
-        /**
-         This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
-         position. This will keep it from breaking anything. The claw then flips to the other side of the slide to be ready to pick up the pixels again.
-         **/
-        if (targetPos == LIFT_POSITIONS.LEVEL_0) {
-            armNewPos = 0;
-            pivotPos = 0;
-        }
+            /**
+             Here, it starts the actual set positions, it initializes everything for that including PID and the motors.
+             **/
+            double currentArmPID = slidesPID.getOutputFromError(armNewPos, cfg.slide1Motor.getCurrentPosition());
+            double currentPivotPID = pivotPID.getOutputFromError(pivotPos, cfg.pivotMotor.getCurrentPosition());
+            /**
+             Dpad up here makes the pivot motor go to preset position 2, then 1 so that the slides don't hit anything on the floor. This also will help with a more peaceful transition
+             from the lowest point of the pivot to the highest point. After that, the linear slides extend to the max hight allowed, and the pivot servo turns to the other side
+             to be able to drop the pixels on the board.
+             **/
+
+            if (targetPos == LIFT_POSITIONS.LEVEL_2) {
+                pivotPos = 1500;
+                armNewPos = -1200;
+                cfg.rotateServo.setPosition(.59);
+            }
+            /**
+             This just raises the linear slide to halfway.
+             **/
+            if (targetPos == LIFT_POSITIONS.LEVEL_1) {
+                pivotPos = 1500;
+                armNewPos = -550;
+                cfg.rotateServo.setPosition(.59);
+            }
+            /**
+             This moves the slides out ever so slightly.
+             **/
+            if (targetPos == LIFT_POSITIONS.LEVEL_3) {
+                armNewPos = -1800;
+                pivotPos = 1500;
+                cfg.rotateServo.setPosition(.59);
+            }
+            /**
+             This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
+             position. This will keep it from breaking anything. The claw then flips to the other side of the slide to be ready to pick up the pixels again.
+             **/
+            if (targetPos == LIFT_POSITIONS.LEVEL_0) {
+                armNewPos = 0;
+                pivotPos = 0;
+            }
 
 
-        /**
-         This here, we have yet to figure out exactly what it does. It maybe just configures the motors and servos again saying that they are not needed anymore until they are called.
-         This is just a theory though. We also now have motor power controls for the pivot motor so that the motor does not shake too much or go too quickly between
-         set positions.
-         **/
-        cfg.slide1Motor.setPower(currentArmPID);
-        cfg.setSlide1Position(armNewPos);
-        cfg.pivotMotor.setPower(currentPivotPID * 1);
-        cfg.pivot2Motor.setPower(currentPivotPID * 1);
-        cfg.setPivotPosition(pivotPos);
+            /**
+             This here, we have yet to figure out exactly what it does. It maybe just configures the motors and servos again saying that they are not needed anymore until they are called.
+             This is just a theory though. We also now have motor power controls for the pivot motor so that the motor does not shake too much or go too quickly between
+             set positions.
+             **/
+            cfg.slide1Motor.setPower(currentArmPID);
+            cfg.setSlide1Position(armNewPos);
+            cfg.pivotMotor.setPower(currentPivotPID * 1);
+            cfg.pivot2Motor.setPower(currentPivotPID * 1);
+            cfg.setPivotPosition(pivotPos);
+
+
+
+
+        t.addData("pivot 1 power: ", cfg.pivotMotor.getPower());
+        t.addData("pivot 2 power: ", cfg.pivot2Motor.getPower());
+        t.addData("slides 1 power: ", cfg.slide1Motor.getPower());
         return false;
     }
 }

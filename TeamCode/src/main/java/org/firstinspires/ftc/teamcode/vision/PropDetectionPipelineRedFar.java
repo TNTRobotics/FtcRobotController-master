@@ -10,7 +10,7 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class PropDetectionPipelineRedClose implements VisionProcessor {
+public class PropDetectionPipelineRedFar implements VisionProcessor {
 
     public Scalar lower = new Scalar(0, 151.0, 86);
     public Scalar upper = new Scalar(240, 255, 160);
@@ -27,7 +27,7 @@ public class PropDetectionPipelineRedClose implements VisionProcessor {
     private final double redThreshold = 4000;
     private volatile PlacementPosition placementPosition = PlacementPosition.CENTER;
 
-    public PropDetectionPipelineRedClose() {
+    public PropDetectionPipelineRedFar() {
 
     }
 
@@ -49,8 +49,8 @@ public class PropDetectionPipelineRedClose implements VisionProcessor {
         // Define the coordinates of three rectangles
         // You need to adjust these coordinates based on your screen resolution
         // You need to adjust these coordinates based on your screen resolution
-        Rect rect1 = new Rect(10, 100, 100, 100);
-        Rect rect2 = new Rect(290, 80, 100, 100);
+        Rect rect1 = new Rect(160, 70, 100, 100);
+        Rect rect2 = new Rect(430, 60, 100, 100);
         Rect rect3 = new Rect(500, 230, 100, 100);
 
         // Draw rectangles on the output
@@ -76,12 +76,12 @@ public class PropDetectionPipelineRedClose implements VisionProcessor {
         r3.release();
 
 
-        if (redAmount1 > redThreshold) {
-            this.placementPosition = PlacementPosition.LEFT;
+        if (redAmount3 > redThreshold) {
+            this.placementPosition = PlacementPosition.RIGHT;
         } else if (redAmount2 > redThreshold) {
             this.placementPosition = PlacementPosition.CENTER;
         } else {
-            this.placementPosition = PlacementPosition.RIGHT;
+            this.placementPosition = PlacementPosition.LEFT;
         }
 
 

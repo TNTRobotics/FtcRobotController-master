@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.vision;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
 import org.firstinspires.ftc.vision.VisionProcessor;
 import org.opencv.core.Core;
@@ -10,10 +13,10 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class PropDetectionPipelineRedClose implements VisionProcessor {
+public class PropDetectionPipelineBlueFar implements VisionProcessor {
 
-    public Scalar lower = new Scalar(0, 151.0, 86);
-    public Scalar upper = new Scalar(240, 255, 160);
+    public Scalar lower = new Scalar(50, 50, 25);
+    public Scalar upper = new Scalar(255, 117.6, 255);
 
 
     private Mat ycrcbMat       = new Mat();
@@ -27,7 +30,7 @@ public class PropDetectionPipelineRedClose implements VisionProcessor {
     private final double redThreshold = 4000;
     private volatile PlacementPosition placementPosition = PlacementPosition.CENTER;
 
-    public PropDetectionPipelineRedClose() {
+    public PropDetectionPipelineBlueFar() {
 
     }
 
@@ -48,19 +51,18 @@ public class PropDetectionPipelineRedClose implements VisionProcessor {
 
         // Define the coordinates of three rectangles
         // You need to adjust these coordinates based on your screen resolution
-        // You need to adjust these coordinates based on your screen resolution
         Rect rect1 = new Rect(10, 100, 100, 100);
         Rect rect2 = new Rect(290, 80, 100, 100);
         Rect rect3 = new Rect(500, 230, 100, 100);
 
         // Draw rectangles on the output
-        drawRectangle(maskedInputMat, rect1, new Scalar(255, 0, 0)); // Blue
+        drawRectangle(maskedInputMat, rect1, new Scalar(255, 0, 0)); // red
         drawRectangle(maskedInputMat, rect2, new Scalar(0, 255, 0)); // Green
-        drawRectangle(maskedInputMat, rect3, new Scalar(0, 0, 255)); // Green
+        drawRectangle(maskedInputMat, rect3, new Scalar(0, 0, 255)); // blue
 
-        drawRectangle(frame, rect1, new Scalar(255, 0, 0)); // Blue
+        drawRectangle(frame, rect1, new Scalar(255, 0, 0)); // red
         drawRectangle(frame, rect2, new Scalar(0, 255, 0)); // Green
-        drawRectangle(frame, rect3, new Scalar(0, 0, 255)); // Green
+        drawRectangle(frame, rect3, new Scalar(0, 0, 255)); // blue
 
 
 
