@@ -149,12 +149,14 @@ public class CamRedClose extends LinearOpMode {
                     //turn to face backwards to the backdrop
                     .turn(Math.toRadians(90))
                     //start claw movement down
+
                     .addTemporalMarker(.8, () -> {
                         rotateServo.setPosition(0);
                     })
 
+
                     //open claw
-                    .addTemporalMarker(1.5, () -> {
+                    .UNSTABLE_addDisplacementMarkerOffset(.7, () -> {
                         clawServo.setPosition(.7);
                     })
 
@@ -162,7 +164,7 @@ public class CamRedClose extends LinearOpMode {
                     //.strafeTo(new Vector2d(12, -42))
                     //start turning to backdrop
                     //claw up
-                    .addTemporalMarker(1.9, () -> {
+                    .UNSTABLE_addDisplacementMarkerOffset(.4, () -> {
                         rotateServo.setPosition(.63);
                     })
                     //start going to backdrop
@@ -170,17 +172,17 @@ public class CamRedClose extends LinearOpMode {
 
                     //move back
                     //start set pos for pivot
-                    .addTemporalMarker(4.5, () -> {
+                    .UNSTABLE_addDisplacementMarkerOffset(2.6, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
 
                     //open claw broken line of code
-                    .addTemporalMarker(5.3, () -> {
+                    .UNSTABLE_addDisplacementMarkerOffset(.8, () -> {
                         clawServo1.setPosition(.3);
                     })
 
                     //reset pivot
-                    .addTemporalMarker(8, () -> {
+                    .UNSTABLE_addDisplacementMarkerOffset(2.7, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     //go to corner
@@ -196,34 +198,49 @@ public class CamRedClose extends LinearOpMode {
             drive.setPoseEstimate(new Pose2d(14, -62, Math.toRadians(90)));
             traj2 = drive.trajectorySequenceBuilder(new Pose2d(14, -62, Math.toRadians(90)))
 
-                    .strafeTo(new Vector2d(12, -42))
-                    .turn(Math.toRadians(90))
-                    .addTemporalMarker(0, () -> {
+                    .strafeTo(new Vector2d(14, -42))
+                    //turn to face backwards to the backdrop
+                    .turn(Math.toRadians(-90))
+                    //start claw movement down
+
+                    .addTemporalMarker(.8, () -> {
                         rotateServo.setPosition(0);
                     })
-                    .addTemporalMarker(1.5, () -> {
+
+
+                    //open claw
+                    .UNSTABLE_addDisplacementMarkerOffset(.7, () -> {
                         clawServo.setPosition(.7);
                     })
-                    .strafeTo(new Vector2d(14, -42))
-                    .addTemporalMarker(2, () -> {
+
+                    //move back slightly
+                    //.strafeTo(new Vector2d(12, -42))
+                    //start turning to backdrop
+                    //claw up
+                    .UNSTABLE_addDisplacementMarkerOffset(.5, () -> {
                         rotateServo.setPosition(.63);
                     })
                     .turn(Math.toRadians(180))
-                    .strafeTo(new Vector2d(50.5, -24))
+                    //start going to backdrop
+                    .strafeTo(new Vector2d(48, -40))
 
-                    .addTemporalMarker(3, () -> {
-                    liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
+                    //move back
+                    //start set pos for pivot
+                    .UNSTABLE_addDisplacementMarkerOffset(2.6, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(5.3, () -> {
+
+                    //open claw broken line of code
+                    .UNSTABLE_addDisplacementMarkerOffset(1.2, () -> {
                         clawServo1.setPosition(.3);
                     })
-                    .addTemporalMarker(7, () -> {
+
+                    //reset pivot
+                    .UNSTABLE_addDisplacementMarkerOffset(2.7, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
-                    // almost perfect pos right drop.strafeTo(new Vector2d(50.5, -42))
-
-                    .strafeTo(new Vector2d(45, -36))
-                    .strafeTo(new Vector2d(47, -60))
+                    //go to corner
+                    .strafeTo(new Vector2d(50, -60))
 
 
 
