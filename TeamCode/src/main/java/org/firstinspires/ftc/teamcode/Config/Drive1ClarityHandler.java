@@ -39,6 +39,8 @@ public class Drive1ClarityHandler {
         LEVEL_1,
         LEVEL_2,
         LEVEL_3,
+        LEVEL_4,
+        LEVEL_5,
 
     }
 
@@ -286,24 +288,33 @@ public class Drive1ClarityHandler {
 
             if (targetPos == LIFT_POSITIONS.LEVEL_2) {
                 pivotPos = 1500;
-                armNewPos = -1200;
-                cfg.rotateServo.setPosition(.59);
+                armNewPos = -1250;
+                cfg.rotateServo.setPosition(.63);
             }
             /**
              This just raises the linear slide to halfway.
              **/
             if (targetPos == LIFT_POSITIONS.LEVEL_1) {
-                pivotPos = 1500;
+                pivotPos = 1400;
                 armNewPos = -550;
-                cfg.rotateServo.setPosition(.59);
+                cfg.rotateServo.setPosition(.63);
             }
+        if (targetPos == LIFT_POSITIONS.LEVEL_5) {
+            pivotPos = 1600;
+            armNewPos = -550;
+            cfg.rotateServo.setPosition(.63);
+        }
             /**
              This moves the slides out ever so slightly.
              **/
             if (targetPos == LIFT_POSITIONS.LEVEL_3) {
                 armNewPos = -1800;
                 pivotPos = 1500;
-                cfg.rotateServo.setPosition(.59);
+                cfg.rotateServo.setPosition(.63);
+            }
+            if (targetPos == LIFT_POSITIONS.LEVEL_4) {
+                armNewPos = 0;
+                pivotPos = 300;
             }
             /**
              This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -311,7 +322,7 @@ public class Drive1ClarityHandler {
              **/
             if (targetPos == LIFT_POSITIONS.LEVEL_0) {
                 armNewPos = 0;
-                pivotPos = 0;
+                pivotPos = -10;
             }
 
 

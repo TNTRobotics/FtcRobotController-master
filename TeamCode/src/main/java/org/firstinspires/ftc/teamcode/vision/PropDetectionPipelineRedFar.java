@@ -76,12 +76,12 @@ public class PropDetectionPipelineRedFar implements VisionProcessor {
         r3.release();
 
 
-        if (redAmount3 > redThreshold) {
-            this.placementPosition = PlacementPosition.RIGHT;
+        if (redAmount1 > redThreshold) {
+            this.placementPosition = PlacementPosition.LEFT;
         } else if (redAmount2 > redThreshold) {
             this.placementPosition = PlacementPosition.CENTER;
         } else {
-            this.placementPosition = PlacementPosition.LEFT;
+            this.placementPosition = PlacementPosition.RIGHT;
         }
 
 

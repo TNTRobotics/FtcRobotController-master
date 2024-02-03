@@ -18,6 +18,9 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.PlacementPosition;
 import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineBlueClose;
 import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedClose;
+import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedClose;
+import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedFar;
+
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -28,9 +31,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * This is an example of a more complex path to really test the tuning.
  */
 @Autonomous(group = "drive")
-public class CamRedClose extends LinearOpMode {
+public class CamRedFar extends LinearOpMode {
 
-    PropDetectionPipelineBlueClose propDetectionRed;
+    PropDetectionPipelineRedFar propDetectionRed;
     String webcamName = "Webcam 1";
 
     private VisionPortal visionPortal;               // Used to manage the video source.
@@ -39,7 +42,8 @@ public class CamRedClose extends LinearOpMode {
 
 
     private VisionPortal visionPortal2;
-    private PropDetectionPipelineRedClose propDetector;
+    private PropDetectionPipelineRedFar propDetector;
+
 
     PID slidesPID = new PID(.002,.0,.02,.008);
 
@@ -51,7 +55,7 @@ public class CamRedClose extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Config cfg = new Config();
 
-        propDetector = new PropDetectionPipelineRedClose();
+        propDetector = new PropDetectionPipelineRedFar();
 
         visionPortal2 = new VisionPortal.Builder()
                 .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
@@ -81,6 +85,7 @@ public class CamRedClose extends LinearOpMode {
             telemetry.addData("1: ", propDetector.getRedAmount1());
             telemetry.addData("2: ", propDetector.getRedAmount2());
             telemetry.update();
+
         }
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
@@ -90,7 +95,7 @@ public class CamRedClose extends LinearOpMode {
         Drive1ClarityHandler drive1ClarityHandler = new Drive1ClarityHandler();
         AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
 
-       // AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+        // AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
 
         PlacementPosition placementPosition = propDetector.getPlacementPosition();
 
@@ -99,46 +104,84 @@ public class CamRedClose extends LinearOpMode {
         TrajectorySequence traj3;
 
         if (placementPosition == PlacementPosition.CENTER) {
-            drive.setPoseEstimate(new Pose2d(14, -62, Math.toRadians(90)));
-            traj = drive.trajectorySequenceBuilder(new Pose2d(14, -62, Math.toRadians(90)))
-//move forward to drop pixel on spike mark
-                    .strafeTo(new Vector2d(14, -39))
-                    //start claw movement down
+            drive.setPoseEstimate(new Pose2d(-14, -62, Math.toRadians(90)));
+            traj = drive.trajectorySequenceBuilder(new Pose2d(-14, -62, Math.toRadians(90)))
+                    /**move forward to drop pixel on spike mark
+                     **/
+                    .strafeTo(new Vector2d(-14, -39))
+
+                    /**start claw movement down **/
                     .addTemporalMarker(0, () -> {
                         rotateServo.setPosition(0);
                     })
-                    //open claw
+
+                    /**open claw**/
                     .addTemporalMarker(1.5, () -> {
-                        clawServo.setPosition(.7);
-                    })
-                    //move back slightly
-                    .strafeTo(new Vector2d(14, -42))
-                    //move claw back up
-                    .addTemporalMarker(2.5, () -> {
-                        rotateServo.setPosition(.63);
-                    })
-                    //turn to face the backdrop
-                    .turn(Math.toRadians(90))
-                    //start moving pivot to set pos
-                    .addTemporalMarker(3, () -> {
-                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
-                    })
-                    //move to backdrop
-                    .strafeTo(new Vector2d(48, -33))
-                    //open claw to drop pixel
-                    .addTemporalMarker(5.3, () -> {
                         clawServo1.setPosition(.3);
                     })
-                    //go back and sideways a little
-                    .strafeTo(new Vector2d(45, -36))
-                    //start set pos
-                    .addTemporalMarker(7.5, () -> {
+                    .turn(Math.toRadians(90))
+
+                    .strafeTo(new Vector2d(-36, -34))
+                    .addTemporalMarker(1.5, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_4);
+                    })
+                    .addTemporalMarker(4, () -> {
+                        clawServo1.setPosition(0);
+                    })
+
+                    .addTemporalMarker(4.5, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+                    })
+                    .strafeTo(new Vector2d(-34, -59))
+
+
+                    /**move claw back up**/
+                    .addTemporalMarker(4.5, () -> {
+                        rotateServo.setPosition(.63);
+                    })
+
+                    /**turn to face the backdrop**/
+
+                    /**start moving pivot to set pos**/
+                    .addTemporalMarker(12, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
+                    })
+
+                    /**move to backdrop**/
+                    .strafeTo(new Vector2d(65, -59))
+
+                    /** **/
+                    .turn(Math.toRadians(90))
+
+
+                    /** **/
+                    .strafeTo(new Vector2d(65, -42))
+
+                    /** **/
+                    .turn(Math.toRadians(-88))
+
+                    .addTemporalMarker(14, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);                    })
+
+                    /**open claw to drop pixel**/
+                    .addTemporalMarker(15, () -> {
+                        clawServo.setPosition(.7);
+                        clawServo1.setPosition(.3);
+
+                    })
+
+                    /**go back and sideways a little**/
+                    .strafeTo(new Vector2d(75, -32))
+
+                    .strafeTo(new Vector2d(70, -32))
+                    /**start set pos**/
+                    .addTemporalMarker(15.5, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
 
-                    //go to the corner
-                    .strafeTo(new Vector2d(47, -60))
-
+                    /**go to the corner**/
+                    .strafeTo(new Vector2d(70, -60))
+                    /**   **/
                     .build();
             drive.followTrajectorySequenceAsync(traj);
         }
@@ -156,7 +199,7 @@ public class CamRedClose extends LinearOpMode {
                     })
 
 
-                   //open claw
+                    //open claw
                     .addTemporalMarker(1.8, () -> {
                         clawServo.setPosition(.7);
                     })
