@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /*
  * This is an example of a more complex path to really test the tuning.
  */
-@Autonomous(group = "drive")
+@Autonomous(group = "drive \uD83D\uDFE5")
 public class CamRedClose extends LinearOpMode {
 
     PropDetectionPipelineBlueClose propDetectionRed;
@@ -41,7 +41,7 @@ public class CamRedClose extends LinearOpMode {
     private VisionPortal visionPortal2;
     private PropDetectionPipelineRedClose propDetector;
 
-    PID slidesPID = new PID(.002,.0,.02,.008);
+    PID slidesPID = new PID(.005,.0,.02,.008);
 
     PID pivotPID = new PID(.002, .0, .02, .008);
 
@@ -75,7 +75,7 @@ public class CamRedClose extends LinearOpMode {
         while (opModeInInit()) {
             clawServo.setPosition(1);
             clawServo1.setPosition(0);
-            rotateServo.setPosition(.63);
+            rotateServo.setPosition(0);
             telemetry.addLine("ready");
             telemetry.addData("position", propDetector.getPlacementPosition());
             telemetry.addData("1: ", propDetector.getRedAmount1());
@@ -105,7 +105,7 @@ public class CamRedClose extends LinearOpMode {
                     .strafeTo(new Vector2d(14, -39))
                     //start claw movement down
                     .addTemporalMarker(0, () -> {
-                        rotateServo.setPosition(0);
+                        rotateServo.setPosition(1);
                     })
                     //open claw
                     .addTemporalMarker(1.5, () -> {
@@ -115,7 +115,7 @@ public class CamRedClose extends LinearOpMode {
                     .strafeTo(new Vector2d(14, -42))
                     //move claw back up
                     .addTemporalMarker(2.5, () -> {
-                        rotateServo.setPosition(.63);
+                        rotateServo.setPosition(0);
                     })
                     //turn to face the backdrop
                     .turn(Math.toRadians(90))
@@ -150,60 +150,38 @@ public class CamRedClose extends LinearOpMode {
                     //turn to face backwards to the backdrop
                     .turn(Math.toRadians(90))
                     //start claw movement down
-
                     .addTemporalMarker(.8, () -> {
-                        rotateServo.setPosition(0);
+                        rotateServo.setPosition(1);
                     })
-
-
                    //open claw
-                    .addTemporalMarker(1.8, () -> {
+                    .addTemporalMarker(1.9, () -> {
                         clawServo.setPosition(.7);
                     })
-
                     //move back slightly
                     //.strafeTo(new Vector2d(12, -42))
                     //start turning to backdrop
                     //claw up
                     .addTemporalMarker(1.9, () -> {
-                        rotateServo.setPosition(.63);
+                        rotateServo.setPosition(0);
                     })
-
-
                     //start going to backdrop
                     .strafeTo(new Vector2d(48, -26))
-
                     //move back
                     //start set pos for pivot
                     .addTemporalMarker(4.1, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-
                     //open claw broken line of code
                     .addTemporalMarker(4.9, () -> {
                         clawServo1.setPosition(.3);
                     })
-
                     //reset pivot
                     .addTemporalMarker(5.3, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
-
-
-
-
                     //go to corner
                     .strafeTo(new Vector2d(50, -60))
-
-
-
-
-
-
-
                     .build();
-
-
             drive.followTrajectorySequenceAsync(traj3);
 
         } else {
@@ -217,7 +195,7 @@ public class CamRedClose extends LinearOpMode {
                     //start claw movement down
 
                     .addTemporalMarker(1.3, () -> {
-                        rotateServo.setPosition(0);
+                        rotateServo.setPosition(1);
                     })
 
 
@@ -231,7 +209,7 @@ public class CamRedClose extends LinearOpMode {
                     //start turning to backdrop
                     //claw up
                     .addTemporalMarker(1.9, () -> {
-                        rotateServo.setPosition(.63);
+                        rotateServo.setPosition(0);
                     })
                     .turn(Math.toRadians(180))
                     //start going to backdrop
@@ -240,14 +218,17 @@ public class CamRedClose extends LinearOpMode {
                     //move back
                     //start set pos for pivot
                     .addTemporalMarker(4.6, () -> {
-                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
 
                     //open claw broken line of code
                     .addTemporalMarker(6.2, () -> {
-                        clawServo1.setPosition(.3);
+                        clawServo1.setPosition(.15);
                     })
-
+                    .waitSeconds(.5)
+                    .addTemporalMarker(6.5, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
+                    })
                     .strafeTo(new Vector2d(35, -43))
                     //reset pivot
                     .addTemporalMarker(7.3, () -> {

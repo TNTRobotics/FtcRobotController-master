@@ -16,11 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.misc.PID;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.PlacementPosition;
-import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineBlueClose;
-import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedClose;
-import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedClose;
 import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedFar;
-
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -32,7 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 //just showing stuff
 @Autonomous(group = "drive \uD83D\uDFE5")
-public class CamRedFar extends LinearOpMode {
+public class CamRedFarNyan extends LinearOpMode {
 
     PropDetectionPipelineRedFar propDetectionRed;
     String webcamName = "Webcam 1";
@@ -143,16 +139,15 @@ public class CamRedFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, -59))
-                    .waitSeconds(5)
                     /**move claw back up**/
                     .addTemporalMarker(4.5, () -> {
                         rotateServo.setPosition(0);
                     })
                     /**start moving pivot to set pos**/
-                    .addTemporalMarker(17, () -> {
+                    .addTemporalMarker(12, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(19.7, () ->{
+                    .addTemporalMarker(14.7, () ->{
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
                     })
                     /**move to backdrop**/
@@ -168,7 +163,7 @@ public class CamRedFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(19.4, () -> {
+                    .addTemporalMarker(14.4, () -> {
                         clawServo.setPosition(.85);
                         clawServo1.setPosition(.3);
 
@@ -179,12 +174,12 @@ public class CamRedFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(70, -32))
                     /**start putting pivot down**/
-                    .addTemporalMarker(22 , () -> {
+                    .addTemporalMarker(17 , () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/
-                    .strafeTo(new Vector2d(70, -13))
-                    .strafeTo(new Vector2d(85, -13))
+                    .strafeTo(new Vector2d(70, -55))
+                    .strafeTo(new Vector2d(85, -55))
 
                     /**build trajectory**/
                     .build();
@@ -227,16 +222,15 @@ public class CamRedFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, -59))
-                    .waitSeconds(5)
                     /**move claw back up**/
                     .addTemporalMarker(5.5, () -> {
                         rotateServo.setPosition(0);
                     })
                     /**start moving pivot to set pos**/
-                    .addTemporalMarker(19, () -> {
+                    .addTemporalMarker(14, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(21.7, () ->{
+                    .addTemporalMarker(16.7, () ->{
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
                     })
                     /**move to backdrop**/
@@ -252,11 +246,11 @@ public class CamRedFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(20.5, () -> {
+                    .addTemporalMarker(15.5, () -> {
                         clawServo.setPosition(.85);
 
                     })
-                    .addTemporalMarker(21.5, () -> {
+                    .addTemporalMarker(16.5, () -> {
                         clawServo1.setPosition(.3);
 
                     })
@@ -266,12 +260,12 @@ public class CamRedFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(70, -34))
                     /**start putting pivot down**/
-                    .addTemporalMarker(24, () -> {
+                    .addTemporalMarker(19, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/
-                    .strafeTo(new Vector2d(70, -13))
-                    .strafeTo(new Vector2d(85, -13))                   /**build trajectory**/
+                    .strafeTo(new Vector2d(70, -55))
+                    .strafeTo(new Vector2d(85, -55))                   /**build trajectory**/
                     .build();
             drive.followTrajectorySequenceAsync(traj3);
 
@@ -311,16 +305,15 @@ public class CamRedFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, -59))
-                    .waitSeconds(5)
                     /**move claw back up**/
                     .addTemporalMarker(6.5, () -> {
                         rotateServo.setPosition(0);
                     })
                     /**start moving pivot to set pos**/
-                    .addTemporalMarker(19, () -> {
+                    .addTemporalMarker(14, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(22.5, () ->{
+                    .addTemporalMarker(17.5, () ->{
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
                     })
                     /**move to backdrop**/
@@ -336,7 +329,7 @@ public class CamRedFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(21.5, () -> {
+                    .addTemporalMarker(16.5, () -> {
                         clawServo.setPosition(.85);
                         clawServo1.setPosition(.3);
 
@@ -347,12 +340,12 @@ public class CamRedFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(70, -42))
                     /**start putting pivot down**/
-                    .addTemporalMarker(23 , () -> {
+                    .addTemporalMarker(18 , () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/
-                    .strafeTo(new Vector2d(70, -13))
-                    .strafeTo(new Vector2d(85, -13))                   /**build trajectory**/
+                    .strafeTo(new Vector2d(70, -55))
+                    .strafeTo(new Vector2d(85, -55))                   /**build trajectory**/
                     .build();
             drive.followTrajectorySequenceAsync(traj2);
 

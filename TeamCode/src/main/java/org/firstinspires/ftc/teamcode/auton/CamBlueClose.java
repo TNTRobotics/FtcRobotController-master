@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.misc.PID;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.PlacementPosition;
 import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineBlueClose;
+import org.firstinspires.ftc.teamcode.vision.PropDetectionPipelineRedClose;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -26,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /*
  * This is an example of a more complex path to really test the tuning.
  */
-@Autonomous(group = "drive")
+@Autonomous(group = "drive \uD83D\uDFE6")
 public class CamBlueClose extends LinearOpMode {
 
     PropDetectionPipelineBlueClose propDetectionRed;
@@ -36,16 +37,19 @@ public class CamBlueClose extends LinearOpMode {
     private AprilTagProcessor aprilTag;              // Used for managing the AprilTag detection process.
     private AprilTagDetection desiredTag = null;     // Used to hold the data for a detected AprilTag
 
-    PID slidesPID = new PID(.02,.0,.02,.008);
 
-    PID pivotPID = new PID(.02, .0, .02, .008);
     private VisionPortal visionPortal2;
     private PropDetectionPipelineBlueClose propDetector;
+
+    PID slidesPID = new PID(.005, .0, .02, .008);
+
+    PID pivotPID = new PID(.002, .0, .02, .008);
 
     @Override
 
 
     public void runOpMode() throws InterruptedException {
+        Config cfg = new Config();
 
         propDetector = new PropDetectionPipelineBlueClose();
 
@@ -55,8 +59,23 @@ public class CamBlueClose extends LinearOpMode {
                 .addProcessor(propDetector)
                 .enableLiveView(true)
                 .build();
+        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
+        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
+        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
 
+        DcMotor pivotMotor = hardwareMap.get(DcMotor.class, "pivotMotor");
+        DcMotor pivot2Motor = hardwareMap.get(DcMotor.class, "pivot2Motor");
+        DcMotor slide1Motor = hardwareMap.get(DcMotor.class, "s1");
+
+
+        cfg.slide1Motor = slide1Motor;
+        cfg.pivot2Motor = pivot2Motor;
+        cfg.pivotMotor = pivotMotor;
+        cfg.rotateServo = rotateServo;
         while (opModeInInit()) {
+            clawServo.setPosition(1);
+            clawServo1.setPosition(0);
+            rotateServo.setPosition(0);
             telemetry.addLine("ready");
             telemetry.addData("position", propDetector.getPlacementPosition());
             telemetry.addData("1: ", propDetector.getRedAmount1());
@@ -64,134 +83,178 @@ public class CamBlueClose extends LinearOpMode {
             telemetry.update();
         }
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Servo clawServo = (Servo) hardwareMap.get(Servo.class, "clawServo");
-        Servo clawServo1 = (Servo) hardwareMap.get(Servo.class, "clawServo1");
-        Servo rotateServo = (Servo) hardwareMap.get(Servo.class, "rotateServo");
-        clawServo.setPosition(1);
-        clawServo1.setPosition(0);
-        rotateServo.setPosition(.63);
-        DcMotor pivotMotor = hardwareMap.get(DcMotor.class, "pivotMotor");
-        DcMotor pivot2Motor = hardwareMap.get(DcMotor.class, "pivot2Motor");
+
         waitForStart();
 
         if (isStopRequested()) return;
-        AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
-        Config cfg = new Config();
         Drive1ClarityHandler drive1ClarityHandler = new Drive1ClarityHandler();
+        AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+
+        // AtomicReference<Drive1ClarityHandler.LIFT_POSITIONS> liftPosition = new AtomicReference<>(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
 
         PlacementPosition placementPosition = propDetector.getPlacementPosition();
 
+        TrajectorySequence traj;
+        TrajectorySequence traj2;
+        TrajectorySequence traj3;
         if (placementPosition == PlacementPosition.CENTER) {
-            drive.setPoseEstimate(new Pose2d(14, 62, Math.toRadians(-90)));
-            TrajectorySequence traj = drive.trajectorySequenceBuilder(new Pose2d(14, 62, Math.toRadians(-90)))
-
-                    .strafeTo(new Vector2d(14, 39))
-                    .addTemporalMarker(1, () -> {
-                        rotateServo.setPosition(0);
+            drive.setPoseEstimate(new Pose2d(-14, -62, Math.toRadians(90)));
+            traj = drive.trajectorySequenceBuilder(new Pose2d(-14, -62, Math.toRadians(90)))
+//move forward to drop pixel on spike mark
+                    .strafeTo(new Vector2d(-14, -39))
+                    //start claw movement down
+                    .addTemporalMarker(0, () -> {
+                        rotateServo.setPosition(1);
                     })
-                    .addTemporalMarker(2.5, () -> {
+                    //open claw
+                    .addTemporalMarker(1.5, () -> {
                         clawServo1.setPosition(.3);
                     })
-                    .strafeTo(new Vector2d(14, 42))
-                    .addTemporalMarker(3.5, () -> {
-                        rotateServo.setPosition(.63);
+                    //move back slightly
+                    .strafeTo(new Vector2d(-14, -42))
+                    //move claw back up
+                    .addTemporalMarker(2.5, () -> {
+                        rotateServo.setPosition(0);
                     })
-
-
+                    //turn to face the backdrop
                     .turn(Math.toRadians(-90))
-                    .strafeTo(new Vector2d(49, 29))
-                    .addTemporalMarker(5, () -> {
+                    //start moving pivot to set pos
+                    .addTemporalMarker(3, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(9.5, () -> {
-                        rotateServo.setPosition(.22);
+                    //move to backdrop
+                    .strafeTo(new Vector2d(-48, -40))
+                    //open claw to drop pixel
+                    .addTemporalMarker(5.1, () -> {
+                        clawServo.setPosition(.85);
                     })
-                    .addTemporalMarker(11, () -> {
-                        clawServo.setPosition(.7);
-                    })
-                    .addTemporalMarker(12, () -> {
+                    //go back and sideways a little
+                    .strafeTo(new Vector2d(-45, -40))
+                    //start set pos
+                    .addTemporalMarker(7.5, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
-                    .strafeTo(new Vector2d(45, 36))
-                    .strafeTo(new Vector2d(47, 60))
+
+                    //go to the corner
+                    .strafeTo(new Vector2d(-47, -60))
+                    .waitSeconds(1)
 
                     .build();
             drive.followTrajectorySequenceAsync(traj);
-            while (opModeIsActive()) {
-                drive.update();
-            }
+        } else if (placementPosition == PlacementPosition.LEFT) {
+            drive.setPoseEstimate(new Pose2d(-14, -62, Math.toRadians(90)));
+            traj3 = drive.trajectorySequenceBuilder(new Pose2d(-14, -62, Math.toRadians(90)))
+                    //move to spike mark
+                    .strafeTo(new Vector2d(-14, -42))
+                    //turn to face backwards to the backdrop
+                    .turn(Math.toRadians(90))
+                    .turn(Math.toRadians(180))
+                    //start claw movement down
+                    .addTemporalMarker(.8, () -> {
+                        rotateServo.setPosition(1);
+                    })
+                    //open claw
+                    .addTemporalMarker(1.9, () -> {
+                        clawServo1.setPosition(.3);
+                    })
+                    //move back slightly
+                    //.strafeTo(new Vector2d(12, -42))
+                    //start turning to backdrop
+                    //claw up
+                    .addTemporalMarker(1.9, () -> {
+                        rotateServo.setPosition(0);
+                    })
+                    //start going to backdrop
+                    .strafeTo(new Vector2d(-48, -43))
+                    //move back
+                    //start set pos for pivot
+                    .addTemporalMarker(4.1, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
+                    })
+                    //open claw broken line of code
+                    .addTemporalMarker(6.2, () -> {
+                        clawServo.setPosition(.85);
+                    })
+                    .addTemporalMarker(6.3, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
+                    })
+                    //reset pivot
+                    .addTemporalMarker(7, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+                    })
+                    //go to corner
+                    .strafeTo(new Vector2d(-50, -60))
+                    .waitSeconds(2)
+                    .build();
+            drive.followTrajectorySequenceAsync(traj3);
+        } else {
+            drive.setPoseEstimate(new Pose2d(-14, -62, Math.toRadians(90)));
+            traj2 = drive.trajectorySequenceBuilder(new Pose2d(-14, -62, Math.toRadians(90)))
+
+                    .strafeTo(new Vector2d(-14, -40))
+                    //turn to face backwards to the backdrop
+                    .turn(Math.toRadians(-90))
+                    //start claw movement down
+
+                    .addTemporalMarker(1., () -> {
+                        rotateServo.setPosition(1);
+                    })
+
+                    //open claw
+                    .addTemporalMarker(1.8, () -> {
+                        clawServo1.setPosition(.3);
+                    })
+                    .addTemporalMarker(2.2, () -> {
+                        rotateServo.setPosition(0);
+                    })
+
+                    //move back slightly
+                    //.strafeTo(new Vector2d(12, -42))
+                    //start turning to backdrop
+                    //claw up
+
+                    //start going to backdrop
+                    .strafeTo(new Vector2d(-48, -32))
+
+
+                    //move back
+                    //start set pos for pivot
+                    .addTemporalMarker(4, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
+                    })
+
+                    //open claw broken line of code
+                    .addTemporalMarker(5, () -> {
+                        clawServo.setPosition(.85);
+                    })
+                    .waitSeconds(.5)
+                    .addTemporalMarker(5.1, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
+                    })
+                    .strafeTo(new Vector2d(-35, -32))
+                    //reset pivot
+                    .addTemporalMarker(7.3, () -> {
+                        liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
+                    })
+                    //go to corner
+                    .strafeTo(new Vector2d(-50, -60))
+
+
+                    .build();
+            drive.followTrajectorySequenceAsync(traj2);
+
+
         }
-           else if (placementPosition == PlacementPosition.LEFT) {
-                drive.setPoseEstimate(new Pose2d(14, 62, Math.toRadians(-90)));
-                TrajectorySequence traj3 = drive.trajectorySequenceBuilder(new Pose2d(14, 62, Math.toRadians(-90)))
+        while (opModeIsActive()) {
+            drive.update();
 
-                        .strafeTo(new Vector2d(14, 42))
-                        .turn(Math.toRadians(90))
-                        .addTemporalMarker(1, () -> {
-                            rotateServo.setPosition(0);
-                        })
-                        .addTemporalMarker(3.1, () -> {
-                            clawServo1.setPosition(.3);
-                        })
-                        .strafeTo(new Vector2d(12, 42))
-                        .addTemporalMarker(3.4, () -> {
-                            rotateServo.setPosition(.63);
-                        })
-                        .strafeTo(new Vector2d(60, 40))
-                        .strafeTo(new Vector2d(50.5, 42))
-                        .addTemporalMarker(9.5, () -> {
-                            rotateServo.setPosition(.22);
-                        })
-                        .addTemporalMarker(10, () -> {
-                            clawServo.setPosition(.7);
-                        })
-                        .strafeTo(new Vector2d(50, 60))
+            telemetry.addData("Lift target position: ", liftPosition.get());
 
-                        .build();
-                drive.followTrajectorySequenceAsync(traj3);
-                while (opModeIsActive()) {
-                    drive.update();
-                }
-            } else {
-                drive.setPoseEstimate(new Pose2d(14, 62, Math.toRadians(-90)));
-                TrajectorySequence traj4 = drive.trajectorySequenceBuilder(new Pose2d(14, 62, Math.toRadians(-90)))
-
-                        .strafeTo(new Vector2d(12, 42))
-                        .turn(Math.toRadians(-90))
-                        .addTemporalMarker(1, () -> {
-                            rotateServo.setPosition(0);
-                        })
-                        .addTemporalMarker(2.5, () -> {
-                            clawServo1.setPosition(.3);
-                        })
-                        .strafeTo(new Vector2d(14, 42))
-                        .addTemporalMarker(3.7, () -> {
-                            rotateServo.setPosition(.63);
-                        })
-                        .strafeTo(new Vector2d(12,42))
-                        .turn(Math.toRadians(180))
-                        .strafeTo(new Vector2d(50.5, 22))
-                        .addTemporalMarker(9.5, () -> {
-                            rotateServo.setPosition(.22);
-                        })
-                        .addTemporalMarker(14, () -> {
-                            clawServo.setPosition(.7);
-                        })
-                        .strafeTo(new Vector2d(45, 36))
-                        .strafeTo(new Vector2d(47, 60))
-
-                        .build();
-                drive.followTrajectorySequenceAsync(traj4);
-
-
-                while (opModeIsActive()) {
-                    drive.update();
-                }
-            }
-        drive1ClarityHandler.updateSlideMotorsAuto(slidesPID, pivotPID, cfg, liftPosition.get(), telemetry);
-
-
+            drive1ClarityHandler.updateSlideMotorsAuto(slidesPID, pivotPID, cfg, liftPosition.get(), telemetry);
+            telemetry.update();
+        }
 
     }
-    }
+}
+
 

@@ -119,34 +119,34 @@ public class Drive1ClarityHandler {
         if (currentGamepad1.left_stick_button && !previousGamepad1.left_stick_button) {
             setpos2 = !setpos2;
             if (setpos2) {
-                pivotPos = 1500;
+                pivotPos = 1300;
                 armNewPos = -1200;
-                cfg.rotateServo.setPosition(.59);
+                cfg.rotateServo.setPosition(0);
             } else {
                 armNewPos = 0;
-                pivotPos = 0;
+                pivotPos = -50;
             }
         }
         if (gamepad1.dpad_up) {
-            pivotPos = 1500;
+            pivotPos = 1300;
             armNewPos = -1200;
-            cfg.rotateServo.setPosition(.59);
+            cfg.rotateServo.setPosition(0);
         }
         /**
          This just raises the linear slide to halfway.
          **/
         if (gamepad1.dpad_right) {
-            pivotPos = 1500;
+            pivotPos = 1300;
             armNewPos = -800;
-            cfg.rotateServo.setPosition(.59);
+            cfg.rotateServo.setPosition(0);
         }
         /**
          This moves the slides out ever so slightly.
          **/
         if (gamepad1.dpad_left) {
             armNewPos = -1800;
-            pivotPos = 1500;
-            cfg.rotateServo.setPosition(.59);
+            pivotPos = 1300;
+            cfg.rotateServo.setPosition(0);
         }
         /**
          This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -170,18 +170,18 @@ public class Drive1ClarityHandler {
             cfg.climb.setPower(0);
         }
         if (gamepad1.cross) {
-            cfg.rotateServo.setPosition(.63);
+            cfg.rotateServo.setPosition(1.5);
         }
         if (currentGamepad1.right_stick_button && !previousGamepad1.right_stick_button) {
             clawMoved = !clawMoved;
             if (clawMoved) {
-                cfg.rotateServo.setPosition(.63);
+                cfg.rotateServo.setPosition(0);
                 armNewPos = 0;
                 pivotPos = 0;
             } else {
-                cfg.rotateServo.setPosition(0);
-                armNewPos = - 700;
-                pivotPos = 200;
+                cfg.rotateServo.setPosition(1.5);
+                armNewPos = 0;
+                pivotPos = 0;
 
             }
         }
@@ -193,8 +193,8 @@ public class Drive1ClarityHandler {
          **/
         cfg.slide1Motor.setPower(currentArmPID);
         cfg.setSlide1Position(armNewPos);
-        cfg.pivotMotor.setPower(currentPivotPID * 1);
-        cfg.pivot2Motor.setPower(currentPivotPID * 1);
+        cfg.pivotMotor.setPower(currentPivotPID * .8);
+        cfg.pivot2Motor.setPower(currentPivotPID * .8);
         cfg.setPivotPosition(pivotPos);
         return closeClaw;
 
@@ -287,22 +287,22 @@ public class Drive1ClarityHandler {
              **/
 
             if (targetPos == LIFT_POSITIONS.LEVEL_2) {
-                pivotPos = 1500;
-                armNewPos = -1250;
-                cfg.rotateServo.setPosition(.63);
+                pivotPos = 1350;
+                armNewPos = -800;
+                cfg.rotateServo.setPosition(0);
             }
             /**
              This just raises the linear slide to halfway.
              **/
             if (targetPos == LIFT_POSITIONS.LEVEL_1) {
-                pivotPos = 1400;
-                armNewPos = -550;
-                cfg.rotateServo.setPosition(.63);
+                pivotPos = 1350;
+                armNewPos = -450;
+                cfg.rotateServo.setPosition(0);
             }
         if (targetPos == LIFT_POSITIONS.LEVEL_5) {
-            pivotPos = 1600;
-            armNewPos = -550;
-            cfg.rotateServo.setPosition(.63);
+            pivotPos = 1350;
+            armNewPos = -350;
+            cfg.rotateServo.setPosition(0);
         }
             /**
              This moves the slides out ever so slightly.
@@ -310,11 +310,11 @@ public class Drive1ClarityHandler {
             if (targetPos == LIFT_POSITIONS.LEVEL_3) {
                 armNewPos = -1800;
                 pivotPos = 1500;
-                cfg.rotateServo.setPosition(.63);
+                cfg.rotateServo.setPosition(0);
             }
             if (targetPos == LIFT_POSITIONS.LEVEL_4) {
                 armNewPos = 0;
-                pivotPos = 300;
+                pivotPos = 250;
             }
             /**
              This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest
@@ -322,7 +322,7 @@ public class Drive1ClarityHandler {
              **/
             if (targetPos == LIFT_POSITIONS.LEVEL_0) {
                 armNewPos = 0;
-                pivotPos = -10;
+                pivotPos = 0;
             }
 
 
@@ -333,7 +333,7 @@ public class Drive1ClarityHandler {
              **/
             cfg.slide1Motor.setPower(currentArmPID);
             cfg.setSlide1Position(armNewPos);
-            cfg.pivotMotor.setPower(currentPivotPID * 1);
+            cfg.pivotMotor.setPower(currentPivotPID * 1 );
             cfg.pivot2Motor.setPower(currentPivotPID * 1);
             cfg.setPivotPosition(pivotPos);
 

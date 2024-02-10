@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -10,7 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
+@Disabled
 @Autonomous(name = "Red Far \uD83D\uDFE5")
 public class RedFar extends LinearOpMode {
 
@@ -19,6 +20,7 @@ public class RedFar extends LinearOpMode {
     /**
      * This function is executed when this OpMode is selected from the Driver Station.
      */
+
     @Override
     public void runOpMode() {
 //setting up motors for auto
