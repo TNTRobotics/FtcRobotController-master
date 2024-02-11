@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode.Driving;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -80,7 +81,7 @@ import org.firstinspires.ftc.teamcode.misc.PID;
 
 If I was you I wouldn't probably touch the things here unless something works horribly wrong, else if driver has no issue and everything works let this exist
  */
-
+@Disabled
 @TeleOp(name="Drive", group="Driving")
 
 public class Drive extends LinearOpMode {

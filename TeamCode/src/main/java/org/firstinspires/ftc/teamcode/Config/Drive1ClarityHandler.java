@@ -314,7 +314,7 @@ public class Drive1ClarityHandler {
             }
             if (targetPos == LIFT_POSITIONS.LEVEL_4) {
                 armNewPos = 0;
-                pivotPos = 250;
+                pivotPos = 350;
             }
             /**
              This moves the linear slides to the minimum positions so that the arm can safely go down. After that, the pivot motor will go to a middle position, break, and go to the lowest

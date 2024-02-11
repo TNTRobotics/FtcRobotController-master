@@ -140,16 +140,16 @@ public class CamBlueFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, 59))
-                    .waitSeconds(5)
+                    .waitSeconds(8)
                     /**move claw back up**/
                     .addTemporalMarker(4.5, () -> {
                         rotateServo.setPosition(0);
                     })
                     /**start moving pivot to set pos**/
-                    .addTemporalMarker(17, () -> {
+                    .addTemporalMarker(20, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
-                    .addTemporalMarker(19.7, () ->{
+                    .addTemporalMarker(22.7, () ->{
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
                     })
                     /**move to backdrop**/
@@ -165,7 +165,7 @@ public class CamBlueFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(19.4, () -> {
+                    .addTemporalMarker(22.4, () -> {
                         clawServo.setPosition(.85);
                         clawServo1.setPosition(.3);
 
@@ -176,7 +176,7 @@ public class CamBlueFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(70, 32))
                     /**start putting pivot down**/
-                    .addTemporalMarker(22 , () -> {
+                    .addTemporalMarker(25 , () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/
@@ -224,16 +224,16 @@ public class CamBlueFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, 59))
-                    .waitSeconds(5)
+                    .waitSeconds(8)
                     /**move claw back up**/
                     .addTemporalMarker(6.5, () -> {
                         rotateServo.setPosition(0);
                     })
                     /**start moving pivot to set pos**/
-                    .addTemporalMarker(19, () -> {
+                    .addTemporalMarker(22, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_1);
                     })
-                    .addTemporalMarker(21.8, () ->{
+                    .addTemporalMarker(24.8, () ->{
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_2);
                     })
                     /**move to backdrop**/
@@ -249,11 +249,11 @@ public class CamBlueFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(21.5, () -> {
+                    .addTemporalMarker(24.5, () -> {
                         clawServo1.setPosition(.15);
 
                     })
-                    .addTemporalMarker(21.5, () -> {
+                    .addTemporalMarker(24.5, () -> {
                         clawServo.setPosition(.7);
 
                     })
@@ -262,7 +262,7 @@ public class CamBlueFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(70, 41))
                     /**start putting pivot down**/
-                    .addTemporalMarker(24, () -> {
+                    .addTemporalMarker(27, () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/
@@ -323,7 +323,7 @@ public class CamBlueFar extends LinearOpMode {
                     })
                     /**move to backdrop, not too close. saftey first**/
                     .strafeTo(new Vector2d(-34, 59.5))
-                    .waitSeconds(5)
+                    .waitSeconds(8)
                     /**move claw back up**/
                     .addTemporalMarker(5.5, () -> {
                         rotateServo.setPosition(0);
@@ -348,11 +348,11 @@ public class CamBlueFar extends LinearOpMode {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_5);
                     })
                     /**open claw to drop pixels**/
-                    .addTemporalMarker(20.8, () -> {
+                    .addTemporalMarker(23.8, () -> {
                         clawServo1.setPosition(.15);
 
                     })
-                    .addTemporalMarker(22.5, () -> {
+                    .addTemporalMarker(25.5, () -> {
                         clawServo.setPosition(.7);
 
                     })
@@ -363,7 +363,7 @@ public class CamBlueFar extends LinearOpMode {
                     /**move away slightly from backdrop**/
                     .strafeTo(new Vector2d(68, 26))
                     /**start putting pivot down**/
-                    .addTemporalMarker(22.9 , () -> {
+                    .addTemporalMarker(25.9 , () -> {
                         liftPosition.set(Drive1ClarityHandler.LIFT_POSITIONS.LEVEL_0);
                     })
                     /**go to the corner**/

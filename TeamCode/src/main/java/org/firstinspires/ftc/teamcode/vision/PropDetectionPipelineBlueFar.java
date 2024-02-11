@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
 import org.firstinspires.ftc.vision.VisionProcessor;
@@ -27,7 +28,7 @@ public class PropDetectionPipelineBlueFar implements VisionProcessor {
     double redAmount2 = 0;
 
     double redAmount3 = 0;
-    private final double redThreshold = 4000;
+    private final double redThreshold = 1800;
     private volatile PlacementPosition placementPosition = PlacementPosition.CENTER;
 
     public PropDetectionPipelineBlueFar() {
@@ -79,7 +80,9 @@ public class PropDetectionPipelineBlueFar implements VisionProcessor {
 
 
         if (redAmount1 > redThreshold) {
+           // BlocksOpModeCompanion.telemetry.addData("Lift target position: ", .get());
             this.placementPosition = PlacementPosition.LEFT;
+
         } else if (redAmount2 > redThreshold) {
             this.placementPosition = PlacementPosition.CENTER;
         } else {
